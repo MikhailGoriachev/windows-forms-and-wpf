@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabControlListView", "TabControlListView\TabControlListView.csproj", "{930E83FE-4239-4753-B0C9-10B927FF4296}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{930E83FE-4239-4753-B0C9-10B927FF4296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930E83FE-4239-4753-B0C9-10B927FF4296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930E83FE-4239-4753-B0C9-10B927FF4296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930E83FE-4239-4753-B0C9-10B927FF4296}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEEFBD59-BC9D-4F77-8DC2-C25B23E8528F}
+	EndGlobalSection
+EndGlobal

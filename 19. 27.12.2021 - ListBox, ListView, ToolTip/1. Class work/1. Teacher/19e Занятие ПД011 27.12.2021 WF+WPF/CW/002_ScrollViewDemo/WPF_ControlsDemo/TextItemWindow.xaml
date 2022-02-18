@@ -1,0 +1,101 @@
+﻿<Window x:Class="WPF_ControlsDemo.TextItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ControlsDemo"
+        mc:Ignorable="d"
+        Title="Текстовые элементы управления, нажмите Alt для отображения акселератора в Label пароля" Height="480" Width="640" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!-- 
+            Просто текст - Label 
+            Но есть возможность задать элемент, на который будет передан
+            фокус ввода при комбинации Alt + символ
+            Задание символа: _<char> т.е. символ за знаком подчеркивания
+            является акселератором (т.е. участвует в Alt-комбинации
+            Target="{Binding ElementName=имяЭлемента} это и есть привязка к элементу управления
+        -->
+        <Label Content="Простой текст, Label. Ввод п_ароля тут >>" 
+            MinHeight="20" Margin="10,20,10,10" FontSize="14" FontWeight="Bold"
+            VerticalContentAlignment="Center"
+            Target="{Binding ElementName=PwdBox}"/>
+        <!-- блок ввода пароля -->
+        <PasswordBox Name="PwdBox" Grid.Row="0" Grid.Column="1" 
+            PasswordChar="☼" MinHeight="20" MaxHeight="20" Height="20" Margin="10,20,10,10" 
+            VerticalContentAlignment="Center"/>
+
+        <!-- 
+        Элемент для вывода текста поддерживает в самом тексте специальные управляющие
+        последовательности: 
+        <Run></Run> для задания параметров отображения отдельных частей текста
+        <Linebreak /> для принудительного перевода строки
+        -->
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3"
+                      Margin="10">
+            <TextBlock TextAlignment="Justify" 
+                       TextWrapping="Wrap" 
+                       Padding="20 10 10 10"
+                       FontFamily="Cambria" 
+                       FontSize="18" 
+                       ScrollViewer.CanContentScroll="True"
+                       
+                       MouseDown="TextBlock_MouseDown">
+                       <Run FontSize="24" FontWeight="Bold" Foreground="Red">З</Run>акрепляем и развиваем навыки 
+                       проектирования приложений с использованием технологии WPF.<LineBreak/>  
+                       <Run FontSize="24" FontWeight="Bold" Foreground="Red">В</Run>ам надо разработать, пожалуйста, 
+                       приложение для ввода данных о продаваемой модели 
+                       автомобиля: название производителя, категория (легковой, грузовой, специальный), 
+                       вид оплаты - либо <Run TextDecorations="Underline" Foreground="Blue">наличные</Run> либо 
+                       <Run TextDecorations="Underline" Foreground="Blue">карточка VISA</Run>, либо 
+                       <Run TextDecorations="Underline" Foreground="Blue">Kiwi-кошелек</Run>.<LineBreak/> 
+                       <Run FontSize="24" FontWeight="Bold" Foreground="Red">Д</Run>ополнительное оборудование - 
+                       магнитола, навигатор, кондиционер, компьютер...<LineBreak/>
+                       <Underline>Ключевым свойством</Underline> здесь является свойство Text, которое задает текстовое содержимое. Причем в 
+                       случае &lt;TextBlock>Текст1&lt;/TextBlock> данное свойство задается неявно.
+                       С помощью таких свойств, как FontFamily, TextDecorations и др., мы можем настроить отображение 
+                       текста. <Bold><Italic><Underline>Однако</Underline></Italic></Bold> мы можем задать и более сложное форматирование
+                       Ключевым свойством здесь является свойство Text, которое задает текстовое содержимое. Причем в 
+                       случае &lt;TextBlock>Текст1&lt;/TextBlock> данное свойство задается неявно.
+                       С помощью таких свойств, как FontFamily, TextDecorations и др., мы можем настроить отображение 
+                       текста. Однако мы можем задать и более сложное форматирование
+                       Ключевым свойством здесь является свойство Text, которое задает текстовое содержимое. Причем в 
+                       случае &lt;TextBlock>Текст1&lt;/TextBlock> данное свойство задается неявно.
+                       С помощью таких свойств, как FontFamily, TextDecorations и др., мы можем настроить отображение 
+                       текста. Однако мы можем задать и более сложное форматирование
+            </TextBlock>
+        </ScrollViewer>
+
+        <!-- 
+            Элемент ввода TextBox 
+            
+            AcceptsReturn="True" клавиша Enter - перевод строки, но не выход из элемента интерфейса 
+         
+            Для проверки орфографии задается SpellCheck.IsEnabled="True" и язык Language="ru-ru"
+            "ru-ru" для русского текста
+            MaxLength="50" - максимальное количество вводимых символов
+        -->
+        <TextBox Name="TxtBox" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" Grid.RowSpan="2" 
+            AcceptsReturn="True" 
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto" 
+            TextWrapping="Wrap"
+
+            SpellCheck.IsEnabled="True" Language="ru-ru"
+
+            Padding="10 0 0 0" Margin ="10" FontSize="16">
+            Прювет, каг дила?
+        </TextBox>
+    </Grid>
+</Window>

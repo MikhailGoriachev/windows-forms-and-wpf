@@ -1,0 +1,278 @@
+﻿<Window x:Class="MenuToolbarTabControls.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MenuToolbarTabControls.Views"
+        xmlns:models="clr-namespace:MenuToolbarTabControls.Models"
+        mc:Ignorable="d"
+         Title="Демонстрация элементов управления" Height="500" 
+        Width="840" Background="LightSteelBlue" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Меню -->
+            <RowDefinition Height="30"/>
+
+            <!-- Панель инструментов -->
+            <RowDefinition Height="42"/>
+
+            <!-- Рабочая область -->
+            <RowDefinition Height="*"/>
+
+            <!-- Строка состояния -->
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Меню приложения - в верхней части окна -->
+        <Menu Grid.Row="0" Grid.Column="0" Height="30" HorizontalAlignment="Stretch"
+              FontFamily="Verdana" FontSize="12">
+            <!-- При задании цвета для пункта меню он распространяется на все 
+                 вложенные пункты.
+                 Но можно назначить цвет индивидуально каждому пункту меню
+            -->
+            <MenuItem Header="Файл" Foreground="DarkBlue">
+                <MenuItem Header="Новый" FontWeight="Bold" Click="New_Menu">
+                    <!-- добавление иконки в пункт меню на предусмотренное
+                         для иконки место
+                    -->
+                    <MenuItem.Icon>
+                        <Image Source="/Images/new.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Открыть" Click="Open_Menu">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/open.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Сохранить">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/save.png"/>
+                    </MenuItem.Icon>
+
+                    <!-- вложенное меню -->
+                    <MenuItem Header="Как текст" Click="SaveAsText_Menu" />
+                    <MenuItem Header="Как книгу Excel"/>
+                    <MenuItem Header="Как базу данных">
+                        <MenuItem Header="Как MS SQL..."></MenuItem>
+                        <MenuItem Header="Как MySQL..."></MenuItem>
+                        <MenuItem Header="Как SQLite..."></MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <!-- Разделитель пунктов меню -->
+                <Separator/>
+                <MenuItem Header="Выход" Foreground="DarkGreen" Click="Exit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/exit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Правка" Foreground="Maroon"/>
+            <MenuItem Header="Вид" Foreground="DarkGreen">
+                <MenuItem Header="Добавить вкладку" Click="AddTab_Menu" />
+                <MenuItem Header="Удалить вкладку" Click="RemoveTab_Menu"/>
+            </MenuItem>
+            <!-- Сложный заголовок пункта меню "Параметры" -->
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Height="15" Width="15" Fill="Brown" Margin="0 0 10 0"/>
+                        <TextBlock Foreground="Brown" Text="Параметры"/>
+                    </StackPanel>
+                </MenuItem.Header>
+                <MenuItem Header="Основные настройки"/>
+                <MenuItem Header="Дополнительные настройки"/>
+                <Separator />
+                <MenuItem Header="Обновления"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Контейнер для панели инструментов ToolBarTray - позволяет
+             хранить несколько панелей инструментов
+             Свойство Orientation размещает панель инструментов вертикально или горизонтально
+        -->
+        <ToolBarTray MinHeight="42"  Grid.Row="1" Orientation="Horizontal" >
+            <!-- Первая панель инструментов -->
+            <ToolBar>
+                <Button Click="New_Menu">
+                    <Image Source="/Images/new.png"/>
+                </Button>
+                <Separator/>
+                <Separator/>
+                <Button Click="Open_Menu">
+                    <Image Source="/Images/open.png"/>
+                </Button>
+                <Button Click="SaveAsText_Menu">
+                    <Image Source="/Images/save.png"/>
+                </Button>
+                <Separator/>
+                <Button Click="Exit_Click">
+                    <Image Source="/Images/exit.png"/>
+                </Button>
+                <Button Content="Команда" ToolTip="Бывают и просто кнопки" 
+                        Width="75" Background="BlueViolet" Foreground="Aqua"/>
+            </ToolBar>
+
+            <!-- Вторая панель инструментов -->
+            <ToolBar Margin="10 0 0 0">
+                <!-- Кнопка поиска со сложным контентом -->
+                <Button Click="Find_Click" Width="220">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Margin="10 0 0 0" MinWidth="160" 
+                                 VerticalContentAlignment="Center"
+                                 FontSize="12"/>
+                        <Image Source="/Images/find.png"/>
+                    </StackPanel>
+                    <Button.ToolTip>
+                        <!-- более сложное оформление -->
+                        <ToolTip Width="260" Height="360" ToolTipService.ShowDuration="500">
+                            <StackPanel>
+                                <TextBlock FontSize="12" Text="Поиск контента по Вашему запросу"/>
+                                <Image Source="/Images/dogFinder.png"/>
+                            </StackPanel>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </ToolBar>
+
+            <!-- Третья панель инструментов -->
+            <ToolBar Margin="10 0 0 0">
+                <!-- Еще одна кнопка со сложным контентом -->
+                <Button Click="Test_Click" Background="LemonChiffon" Width="140"
+                        ToolTip="Проверка целостности данных">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/heart.png"/>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0">Диагностика</TextBlock>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Margin="5,0,0,0" ToolTip="Восстановление целостности данных">
+                    <Image Source="/Images/health.png"/>
+                </Button>
+
+                <!-- И еще одна кнопка со сложным контентом -->
+                <Button Width="120">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Images/dogFinder.png" Stretch="Uniform" Height="36" Width="36"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Начало"/>
+                                <TextBlock Text="работы"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- простейший пример вкладок-->
+        <!--<TabControl Grid.Row="2" Grid.Column="0" Background="Lavender" Margin="5" FontFamily="Verdana">
+            
+         -->
+        <!--Вкладки, у которых заголовки имеют разный цвет-->
+
+        <!--<TabControl Name="Goods" Grid.Row="2">
+            <TabItem Header="Вкладка 1" Background="Green" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalContentAlignment="Center">
+                <TabItem.Content>
+                    <TextBlock FontSize="14">Первая вкладка</TextBlock>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Вкладка 2" Background="LightSeaGreen">Вторая вкладка</TabItem>
+            <TabItem Header="Вкладка 3" Background="GreenYellow">Третья вкладка</TabItem>
+        </TabControl>-->
+
+        <!-- Пример сложной структуры вкладок. Отдельно определяем заголовок - TabItem.Header, 
+             отдельно задаем контент вкладки - TabItem.Content -->
+        <TabControl Name="TbcGoods" Grid.Row="2">
+            <!--первая вкладка-->
+            <TabItem Name="SmartphonesTab">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Height="10" Width="10" Fill="Blue"/>
+                        <TextBlock Margin="3">Смартфоны</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <GroupBox Margin="10" Padding="10" Header=" Доступные модели ">
+                            <!--Контекстное меню - существует только в конкретном элементе управления-->
+                            <GroupBox.ContextMenu>
+                                <ContextMenu x:Name="CmGroupBox" FontSize="14">
+                                    <MenuItem Header="Отмена выбора"/>
+                                    <Separator/>
+                                    <MenuItem Header="Добавить вкладку" Click="AddTab_ContextMenuClick"/>
+                                    <MenuItem Header="Удалить вкладку" Click="RemoveTab_Menu"/>
+                                    <Separator/>
+                                    <MenuItem Header="Выход" Click="Exit_Click">
+                                        <MenuItem.Icon>
+                                            <Image Source="/Images/exit.png"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </GroupBox.ContextMenu>
+
+                            <!--Контент вкладки-->
+                            <StackPanel Name="SpRadiobuttons" Orientation="Vertical">
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" IsChecked="True" Content="Samsung G4"/>
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" Content="Samsung J7"/>
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" Content="Apple iPhone 6"/>
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" Content="Apple iPhone 7"/>
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" Content="Alcaltel OneTouch X5"/>
+                                <RadioButton Margin="10 10 10 0" FontSize="16" GroupName="rbPhones" Content="Beidou Mi x87"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <TextBlock Margin="10 0 10 0" x:Name="TbRbChoose" 
+                                   Height="24" FontSize="16" FontWeight="Bold" Foreground="DarkBlue"
+                                   Text="Текст с выбранной радиокнопки выводим тут"/>
+                        <Button x:Name="BtnAddTab" Margin="10, 0, 10, 5" Height="30" MinWidth="80" MaxWidth="240" Width="120" Content="Добавить вкладку" Click="btnAddTab_Click"/>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+
+            <!--вторая вкладка-->
+            <TabItem Name="TabletsTab">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Background="Aquamarine">
+                        <Rectangle Height="10" Width="10" Fill="DarkGreen"/>
+                        <TextBlock Margin="3">Планшеты</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <ListBox Name="LbTablets" DisplayMemberPath="Title" 
+                            Margin = "10" 
+                            FontSize="16" Foreground="DarkBlue" Background="AliceBlue" 
+                            SelectionChanged="lbTablets_Selected">
+
+                            <models:Tablet Title="Galaxy Tab 3" Company="Samsung" Price="15000"/>
+                            <models:Tablet Title="iPad Air 4" Company="Apple" Price="25000"/>
+                            <models:Tablet Title="HTC Pad 7" Company="HTC" Price="10000"/>
+                            <models:Tablet Title="Meizu Mi Tab" Company="Meizu" Price="5000"/>
+                            <models:Tablet Title="Surface Pro 3" Company="Microsoft" Price="12000"/>
+                            <models:Tablet Title="OneTouch 123 Tab" Company="Alcatel" Price="3000"/>
+
+                        </ListBox>
+                        <TextBlock Name="TbChoose" Margin="10" Foreground="DarkGreen" 
+                                   FontSize="16" FontWeight="Bold"/>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+
+        </TabControl>
+
+        <!-- Статус-бар -->
+        <StatusBar Grid.Row="3" Background="DarkCyan" Foreground="Azure" Padding="0">
+            <TextBlock Margin="10,0,0,0" Name="TbStatusBar" Width="450" Height="26"
+                       MaxWidth="450">Это строка, выведенная в статус-бар</TextBlock>
+            <TextBox x:Name="TxbStatus" IsReadOnly="True" Background="Bisque" 
+                     Width="255" MaxWidth="255" Height="26" Margin="5, 0, 0, 0"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     FontWeight="Bold">Еще строка статуса</TextBox>
+        </StatusBar>
+    </Grid>
+</Window>

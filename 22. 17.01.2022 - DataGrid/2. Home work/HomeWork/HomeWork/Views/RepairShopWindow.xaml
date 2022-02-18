@@ -1,0 +1,106 @@
+﻿<Window x:Class="HomeWork.Views.RepairShopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        mc:Ignorable="d"
+        Title="Создание ремонтной мастерской" Width="800"
+        SizeToContent="Height"
+        FontFamily="Verdana"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="DimGray"
+        FontSize="14"
+        Icon="..\Images\RepairShop\television.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <Label Grid.Row="0" Grid.ColumnSpan="2"
+               Name="LblHeader"
+               Background="Silver"
+               Content="Создание ремонтной мастерской"
+               FontSize="20"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <!-- Первый столбец параметров -->
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="1" Grid.Column="0"
+                    Margin="20">
+
+            <!-- Название мастерской -->
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Название мастерской"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+            <TextBox Name="TbxName"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+
+        </StackPanel>
+
+
+        <!-- Второй столбец параметров -->
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="20">
+
+            <!-- Адрес -->
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Адрес"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+            <TextBox Name="TbxAddress"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+
+        </StackPanel>
+
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <!-- Создать -->
+            <Button Name="BtnOk"
+                    Content="Создать"
+                    Height="50"
+                    Width="200"
+                    Margin="20 0"
+                    Background="YellowGreen"
+                    BorderBrush="Black" BorderThickness="2"
+                    Click="BtnOK_Click"/>
+
+            <!-- Отменить -->
+            <Button Content="Отменить"
+                    Height="50"
+                    Width="200"
+                    Margin="20 0"
+                    Background="#FFE85353"
+                    BorderBrush="Black" BorderThickness="2"
+                    IsCancel="True"/>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

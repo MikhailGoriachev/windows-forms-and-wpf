@@ -1,0 +1,137 @@
+﻿<Window x:Class="WPF_ControlContent.WinCheckBoxesRadioButtons"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ControlContent"
+        mc:Ignorable="d"
+        Title="Работа с Checkbox'ами и Radiobutton'ами  " Height="480" Width="640" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False">
+
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical" Name="stackCheckBoxes" Margin="10">
+            <CheckBox Name="chBox1" IsChecked="False" IsThreeState="True" 
+                      Height="20" Content="Не отмечен" Margin="10">
+                <CheckBox.ToolTip>
+                    Чек-бокс, в исходном состоянии показывает как выглядит не 
+                    отмеченный элемент управления
+                </CheckBox.ToolTip>
+            </CheckBox>
+            <Line Fill="DarkGreen" StrokeThickness="2" Width="120" />
+            <CheckBox Name="chBox2" IsChecked="True" IsThreeState="True" 
+                      Height="20" Content="Отмечен" Margin="10"
+                      ToolTipService.ShowDuration="1500" 
+                      ToolTip="Чек-бокс, в исходном состоянии показывает как выглядит отмеченный элемент управления">
+            </CheckBox>
+            <Line Fill="DarkGreen" StrokeThickness="2" Width="100" />
+            <CheckBox Name="chBox3" IsChecked="{x:Null}" IsThreeState="True" Height="20" Content="Неопределено" Margin="10">
+                <CheckBox.ToolTip>
+                    <!-- простейшее оформление -->
+                    Чек-бокс, в исходном состоянии показывает как выглядит элемент управления 
+                    в третьем состоянии
+                </CheckBox.ToolTip>
+            </CheckBox>
+            <Line Fill="DarkGreen" StrokeThickness="2" />
+
+            <TextBlock Name="tbBox1" Foreground="Green" FontSize="14" FontWeight="Bold" Text=""/>
+
+            <Line Fill="Blue" StrokeThickness="5" Width="120"/>
+
+            <TextBlock Name="tbBox2" Foreground="Green" FontSize="14" FontWeight="Bold" Text=""/>
+
+            <!-- Еще один пример использования контента для настройки -->
+            <Line Margin="10" StrokeThickness="2" X1="1" Stroke="#FF743232" >
+                <Line.Fill>
+                    <SolidColorBrush Color="Blue"/>
+                </Line.Fill>
+                <Line.Width>
+                    100
+                </Line.Width>
+            </Line>
+
+            <TextBlock Name="tbBox3" Foreground="Green" FontSize="14" FontWeight="Bold" Text=""/>
+
+            <!-- кнопка, для которой программно создадим Tooltip -->
+            <Button Name="btnButon1" Content="&lt;&lt; Предыдущее окно" Margin="10" 
+                    Width="150" Height="30" FontWeight="Bold"
+                    IsCancel="True"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Name="stackRadiobuttons" Margin="10">
+            <!-- ToolTipService.ShowDuration="10" - прикрепленное свойство, управление
+                 длительностью отображения подсказки -->
+            <RadioButton Name="rbEng0" GroupName="Engines" Content="Дизельный" Margin="10" IsChecked="True">
+                <RadioButton.ToolTip>
+                    <!-- более сложное оформление -->
+                    <ToolTip Width="360" Height="240" ToolTipService.ShowDuration="500">
+                        <!-- более сложное оформление -->
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Даймлер-Бенц"/>
+                            <!-- картинка должна быть частью проекта -->
+                            <Image Source="Imgs/diesel.jpg"/>
+                        </StackPanel>
+                    </ToolTip>
+                </RadioButton.ToolTip>
+            </RadioButton>
+
+            <RadioButton Name="rbEng1" GroupName="Engines" Content="Бензиновый" Margin="10">
+                <RadioButton.ToolTip>
+                    <!-- более сложное оформление -->
+                    <ToolTip Width="360" Height="240" ToolTipService.ShowDuration="500">
+                        <StackPanel>
+                            <TextBlock Text="Двигатель Emak"/>
+                            <Image Source="Imgs/carburator.jpg"/>
+                        </StackPanel>
+                    </ToolTip>
+                </RadioButton.ToolTip>
+            </RadioButton>
+
+            <RadioButton Name="rbEng2" GroupName="Engines" Content="Турбинный" Margin="10">
+                <RadioButton.ToolTip>
+                    <!-- более сложное оформление, демо по атрибутам ToolTip 
+                         HasDropShadow="True" - отбрасывать тень
+                         Placement - размещение по отношению к элементу
+                    -->
+                    <ToolTip Width="360" Height="240" 
+                             Placement="Relative"
+                             HorizontalOffset="20" VerticalOffset="15">
+                        <StackPanel>
+                            <TextBlock Text="Микротурбина Capstor"/>
+                            <Image Source="Imgs/turbine.jpg"/>
+                        </StackPanel>
+                    </ToolTip>
+                </RadioButton.ToolTip>
+            </RadioButton>
+
+            <Line Margin="10"/>
+
+            <TextBlock Name="tbEngines" Foreground="Green" FontSize="14" FontWeight="Bold" Text=""/>
+
+            <Line Margin="10"/>
+
+            <RadioButton Name="rbFuel0" GroupName="Fuels" Content="Солярка" Margin="10" IsChecked="True" />
+            <RadioButton Name="rbFuel1" GroupName="Fuels" Content="Бензин" Margin="10" />
+            <RadioButton Name="rbFuel2" GroupName="Fuels" Content="Керосин" Margin="10" />
+
+            <Line Margin="10"/>
+
+            <TextBlock Name="tbFuels" Foreground="Blue" FontSize="14" FontWeight="Bold" Text=""/>
+
+            <!-- для этой кнопки создадим Popup -->
+            <Button Name="btnButon2" Content="Следующее окно >>" Margin="10" 
+                    Width="150" Height="30" FontWeight="Bold" 
+                    MouseEnter="btnButon2_MouseEnter" Click="btnButon2_Click"/>
+            
+            <Popup Name="popup1" StaysOpen="False" Placement="Mouse" MaxWidth="360" 
+                   MaxHeight="240">
+                <StackPanel>
+                    <TextBlock Text="Описание кнопки" FontSize="16"/>
+                    <Button Content="Это кнопка" Margin="0, 5" Width="120" 
+                            Click="ButtonFromPopup_Click"/>
+                    <Image Source="Imgs/cat.jpg"/>
+                </StackPanel>
+            </Popup>
+        </StackPanel>
+    </StackPanel>
+</Window>

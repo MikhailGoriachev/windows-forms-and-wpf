@@ -1,0 +1,14 @@
+﻿<Window x:Class="_03_CustomCommand.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пользовательские команды" Height="350" Width="525" Loaded="Window_Loaded">
+    
+    <StackPanel>
+        <TextBox Name="TxbExample" Margin="10"></TextBox>
+
+        <!-- Параметром команды является текст, вводимый в TextBox -->
+        <Button Name="Button1" Margin="10" CommandParameter="{Binding ElementName=TxbExample, Path=Text}">
+            Кнопка</Button>
+    </StackPanel>
+
+</Window>

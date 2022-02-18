@@ -1,0 +1,104 @@
+﻿<Window x:Class="WPF_ControlsDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_ControlsDemo"
+        mc:Ignorable="d"
+        Title="Демонстрация элементов управления содержанием WPF" 
+        Height="480" Width="640" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- 
+        Элемент прокрутки - прокручивает содержимое, обеспечивает показ большего
+        объема, чем есть на экране.
+        Может содержать только один элемент - т.е. для сложного содержимого нужен
+        контейнер
+        Свойства:  HorizontalScrollBarVisibility, VerticalScrollBarVisibility - управление видимостью полос прокрутки
+        могут принимамть значения: Auto, Visible, Hidden, Disabled
+        Указание свойств не обязательно, задаем только для примера
+        -->
+        <GroupBox Grid.Row="0" Grid.Column="0" 
+                  Header="Группа командных кнопок" Padding="10,10,0,10" Margin="10"
+                  BorderBrush="DarkGray" BorderThickness="2">
+            <!-- Padding для отступа справа для кнопок -->
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Padding="0, 0, 10, 0">
+                <StackPanel>
+                    <Button MinHeight="60" Background="AliceBlue" Content="Текстовые элементы управления" 
+                            Margin="5, 5, 5, 10" Click="Button_Click"/>
+                    <Button MinHeight="60" Background="Aquamarine" Content="Кнопка 2 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="Bisque" Content="Кнопка 3 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="Chocolate" Content="Кнопка 4 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="Cornsilk" Content="Кнопка 5 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="DarkMagenta" Content="Кнопка 6 в ScrollView" Margin="5, 0, 5, 10"
+                            Foreground="AntiqueWhite"/>
+                    <Button MinHeight="60" Background="FloralWhite" Content="Кнопка 7 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="Gainsboro" Content="Кнопка 8 в ScrollView" Margin="5, 0, 5, 10"/>
+                    <Button MinHeight="60" Background="Gainsboro" Content="Кнопка 9 в ScrollView" Margin="5, 0, 5, 10"/>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+
+        <!-- Еще одна область прокрутки для демонстрации программного управления прокруткой содержимого -->
+        <GroupBox Grid.Row="0" Grid.Column="1" 
+                  Header="Процессоры 2016" Margin="10" Padding="10 10 0 10"
+                  BorderBrush="DarkGray" BorderThickness="2">
+            <ScrollViewer Name="scroll">
+                <StackPanel>
+                    <RadioButton GroupName="CPUs" Margin="10" Content="Intel Core i7 7700K"/>
+                    <!-- пример сложного контента радиокнопки -->
+                    <RadioButton GroupName="CPUs" Margin="10" VerticalContentAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Ellipse MinWidth="20" MinHeight="20" Margin="5,0" 
+                                     Fill="#FF3D28C1" 
+                                     Stroke="#FF321F1F"/>
+                            <TextBlock>Intel Core i7 7500</TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i7 7100</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i5 7500K</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i5 7400</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i5 7300</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i3 7100</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i3 7050</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Core i3 7020</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Pentium G7300</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Pentium G7200</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Pentium G7100</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Atom Z7150</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Atom Z7100</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">Intel Atom Z7050</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">AMD Phenom X4 3200</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">AMD Bulldozer X6 3500</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">AMD E-1220</RadioButton>
+                    <RadioButton GroupName="CPUs" Margin="10">AMD Z-950</RadioButton>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+        <!-- Блок управляющих элементов приложения в окне -->
+        <Expander Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" ExpandDirection="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Margin ="5" MinWidth="190" Height="30" 
+                        Name="btnExit" Background="Cornsilk" 
+                        Foreground="Brown" Content="Выход" Click="btnExit_Click"/>
+                <Button Margin ="5" MinWidth="190" Height="30" Name="btnUp" 
+                        Content="Вверх" Click="btnUp_Click"/>
+                <Button Margin ="5" MinWidth="190" Height="30"  Name="btnDown" 
+                        Content="Вниз" Click="btnDown_Click"/>
+            </StackPanel>
+        </Expander>
+     
+    </Grid>
+</Window>

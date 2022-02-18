@@ -1,0 +1,75 @@
+﻿<Window x:Class="HomeWork.Views.SelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Выбор параметров выборки" 
+        Height="300" Width="450" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Background="DimGray"
+        FontFamily="Verdana" FontSize="14"
+        Icon="..\Images\RepairShop\television.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Label Name="LblHeader"
+               Background="Silver"
+               Content="Название выборки"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               FontSize="18"/>
+        
+        <!-- Выбор параметра -->
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <Label Name="LblParam"
+                   Content="Выберите значение: "
+                   Background="Silver"
+                   Margin="40 40 40 0"
+                   Height="40" Width="350"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+
+            <ComboBox Name="CmbParam"
+                      Height="40"
+                      Width="350"
+                      SelectedIndex="0"
+                      VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <!-- Добавить -->
+            <Button Name="BtnOk"
+                    Content="Выбрать"
+                    Height="50"
+                    Width="200"
+                    Margin="10 0"
+                    Background="YellowGreen"
+                    BorderBrush="Black" BorderThickness="2"
+                    Click="BtnOk_Click"/>
+
+            <!-- Отменить -->
+            <Button Content="Отменить"
+                    Height="50"
+                    Width="200"
+                    Margin="10 0"
+                    Background="#FFE85353"
+                    BorderBrush="Black" BorderThickness="2"
+                    IsCancel="True"/>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

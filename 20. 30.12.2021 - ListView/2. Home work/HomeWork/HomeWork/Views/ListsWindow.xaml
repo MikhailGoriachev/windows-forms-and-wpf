@@ -1,0 +1,101 @@
+﻿<Window x:Class="HomeWork.Views.ListsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:HomeWork.Models"
+        xmlns:local="clr-namespace:HomeWork"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Списки пилотов и стюардесс" 
+        SizeToContent="Height" Width="1000"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Background="DimGray"
+        FontSize="18"
+        Loaded="Window_Loaded"
+        Icon="..\Images\paper_airplane.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Список пилотов -->
+        <Label Background="Silver"
+               Margin="10"
+               Content="Список пилотов"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        <ListView Grid.Row="1"
+                  Margin="10 0"
+                  ItemsSource="{DynamicResource ResourceKey=Pilots}"
+                  FontSize="14"
+                  Background="Silver">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}">Фамилия</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}">Имя</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Patronymic}">Отчество</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AircraftNumber}">Номер самолёта</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AmountFlights}">Количество рейсов</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+                <col:ArrayList x:Key="Pilots">
+                    <models:Pilot LastName="Дементьев" FirstName="Эдуард"    Patronymic="Дмитриевич"    AircraftNumber="LH012"     AmountFlights="5"/>
+                    <models:Pilot LastName="Соколов"   FirstName="Филипп"    Patronymic="Максимович"    AircraftNumber="LH416"     AmountFlights="6"/>
+                    <models:Pilot LastName="Суханов"   FirstName="Клемент"   Patronymic="Дмитриевич"    AircraftNumber="AA071"     AmountFlights="7"/>
+                    <models:Pilot LastName="Блинов"    FirstName="Климент"   Patronymic="Леонидович"    AircraftNumber="DE6164"    AmountFlights="8"/>
+                    <models:Pilot LastName="Устинов"   FirstName="Вольдемар" Patronymic="Вадимович"     AircraftNumber="BA1759"    AmountFlights="9"/>
+                    <models:Pilot LastName="Кузьмин"   FirstName="Трофим"    Patronymic="Юхимович"      AircraftNumber="BA1707"    AmountFlights="10"/>
+                    <models:Pilot LastName="Голубев"   FirstName="Велорий"   Patronymic="Ярославович"   AircraftNumber="KL1766"    AmountFlights="11"/>
+                    <models:Pilot LastName="Маслов"    FirstName="Август"    Patronymic="Сергеевич"     AircraftNumber="LH6810"    AmountFlights="12"/>
+                    <models:Pilot LastName="Яковлев"   FirstName="Тарас"     Patronymic="Львович"       AircraftNumber="PS408"     AmountFlights="13"/>
+                    <models:Pilot LastName="Потапов"   FirstName="Владимир"  Patronymic="Андреевич"     AircraftNumber="LH564"     AmountFlights="14"/>
+                    <models:Pilot LastName="Коваленко" FirstName="Эрик"      Patronymic="Викторович"    AircraftNumber="PS754"     AmountFlights="8"/>
+                    <models:Pilot LastName="Бобров"    FirstName="Бронислав" Patronymic="Львович"       AircraftNumber="KL1860"    AmountFlights="10"/>
+                </col:ArrayList>
+            </ListView.Resources>
+        </ListView>
+
+        
+        <!-- Список стюардесс -->
+        <Label Grid.Row="2"
+               Background="Silver"
+               Margin="10"
+               Content="Список стюардесс"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        <ListView Name="LviStewardess"
+                  Grid.Row="3"
+                  Margin="10 0"
+                  FontSize="14"
+                  Background="Silver">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=LastName}">Фамилия</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName}">Имя</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Patronymic}">Отчество</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ColorUniform}">Цвет формы</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AmountFlights}">Количество рейсов</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AmountClients}">Обслужено клиентов</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <!-- Выход -->
+        <Button Grid.Row="4"
+                Content="Выход"
+                Height="40"
+                Width="300"
+                Foreground="Black"
+                Background="#FFE85353"
+                BorderBrush="Black"
+                BorderThickness="2"
+                IsCancel="True"/>
+    </Grid>
+</Window>

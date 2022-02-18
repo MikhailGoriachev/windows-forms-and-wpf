@@ -1,0 +1,123 @@
+﻿<Window x:Class="ControlsElements.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlsElements"
+
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:models="clr-namespace:ControlsElements.Models"
+
+        mc:Ignorable="d"
+        Title="Занятие 12.01.2022 - Элементы TreeView и DataGrid" 
+        Height="600" 
+        Width="1000" 
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="57*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- TreeView - отображение древовидных данных -->
+            <TreeView Name="TvFirst" Grid.Column="0" Grid.Row="0" FontSize="18" Margin="10">
+                <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Базовый семестр">
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Основы программирования"/>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="CISCO ITE"/>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="ООП программирование C++">
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Перегрузка операций"/>
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Динамические структуры данных"/>
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Implicit конструктор"/>
+                    </TreeViewItem>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="FOS"/>
+                </TreeViewItem>
+                <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Специализация">
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Цикл технологий .NET Framework">
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="C# - ядро языка" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Windows Forms" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="XML" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="WPF" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="WCF" />
+                    </TreeViewItem>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Цикл веб технологий">
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="PHP и AJAX" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Java SE" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Android development" />
+                    </TreeViewItem>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Неспециальные предметы">
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Internet Essentials" />
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="MSP" />
+                    </TreeViewItem>
+                    <TreeViewItem Expanded="DoExpanded" Selected="DoSelected"
+                                  Header="Курсовое пректирование">
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header=".Net Framework"/>
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Веб программирование"/>
+                        <TreeViewItem Expanded="DoExpanded" Selected="DoSelected" Header="Веб программирование на Java"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+
+            <!-- Элемент для деления окна на две части по вертикали -->
+            <GridSplitter 
+                Background="DarkBlue" Grid.Column="1" ShowsPreview="True" Width="3" 
+                VerticalAlignment="Stretch" Margin="0,10,0,-10"/>
+
+            <!-- Табличное представление данных, загрузка данных из ресурса -->
+            <!-- ColumnWidth="*" заполняет столбцами всю доступную ширину   -->
+            <DataGrid Name="DgMain" Grid.Row="0" Grid.Column="2"
+                AutoGenerateColumns="True"
+                ItemsSource="{DynamicResource ResourceKey=Tablets}"
+                ColumnWidth="*"
+                Margin="10" FontSize="18" SelectionChanged="DgMain_SelectionChanged">
+               
+                <DataGrid.Resources>
+                    <col:ArrayList x:Key="Tablets">
+                        <models:Tablet Title="Tab 7"      Company="Samsung" Price="87000"/>
+                        <models:Tablet Title="Yoga"       Company="Lenovo"  Price="17000"/>
+                        <models:Tablet Title="Xperia Z4"  Company="Sony"    Price="18000"/>
+                        <models:Tablet Title="iPad Air 4" Company="Apple"   Price="35000"/>
+                        <models:Tablet Title="Mi Pad 8"   Company="Meizu"   Price="14000"/>
+                        <models:Tablet Title="Note Air"   Company="Onyx"    Price="47000"/>
+                        <models:Tablet Title="iPad pro"   Company="Apple"   Price="86000"/>
+                        <models:Tablet Title="iPad mini"  Company="Apple"   Price="42000"/>
+                    </col:ArrayList>
+                </DataGrid.Resources>
+            </DataGrid>
+        </Grid>
+
+        <!-- 
+        MinWidth="230" Width="230" MaxWidth="230"
+        -->
+        <StatusBar Height="30" Grid.Row="3">
+            <TextBlock Name="TbSbMain" 
+                       Text="Lorem ipsum..."
+                       TextAlignment="Left"
+                       VerticalAlignment="Center" 
+                       Margin="10,0" 
+                       Width="400"
+                       Foreground="Aquamarine"
+                       Background="DarkBlue"/>
+            <TextBlock Name="TbSbAlter" 
+                       Text="Lorem ipsum..." 
+                       TextAlignment="Left"
+                       VerticalAlignment="Center" Margin="10,0"
+                       MinWidth="230" Width="360" MaxWidth="230"
+                       Background="AliceBlue"/>
+            <TextBlock Name="TbSbTablets" 
+                       Text="Lorem ipsum..." 
+                       TextAlignment="Left"
+                       VerticalAlignment="Center" Margin="10,0"
+                       MinWidth="230" Width="120" MaxWidth="230"
+                       Background="Lavender" />
+        </StatusBar>
+    </Grid>
+</Window>

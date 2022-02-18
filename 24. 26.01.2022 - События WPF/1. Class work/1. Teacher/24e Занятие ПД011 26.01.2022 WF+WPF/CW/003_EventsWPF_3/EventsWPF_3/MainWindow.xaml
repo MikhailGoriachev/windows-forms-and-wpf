@@ -1,0 +1,67 @@
+﻿<Window x:Class="EventsWPF_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EventsWPF_3"
+        mc:Ignorable="d"
+        Title="События мыши и перетаскивание" Height="480" Width="840" 
+        WindowStartupLocation="CenterScreen" 
+        MouseMove="Window_MouseMove">
+    
+    <Grid PreviewMouseDown="Grid_MouseDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Margin="10">
+            <TextBlock Name="TxbInfo" Background="LightGreen" TextWrapping="Wrap"/>
+        </ScrollViewer>
+
+        <!-- элементы для демонстрации DragAndDrop -->
+        <!-- источник данных для перетаскивания -->
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="10">
+            <TextBlock Name="TxbSource"  Background="Lavender" 
+                   TextWrapping="Wrap"
+                   MouseDown="txbSource_MouseDown"/>
+        </ScrollViewer>
+
+        <!-- возможные приемники данных при перетаскивании 
+             AllowDrop="True" - может принимать перетаскиваемые данные
+        -->
+        <TextBox Name="EdText" AllowDrop="True" Grid.Row="0" Grid.Column="1" Margin="10"
+                 TextWrapping="Wrap" Background="Lavender"
+                 Drop="edText_Drop"/>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="10">
+            <TextBlock Name="TxbDest"  Background="Lavender" 
+                   TextWrapping="Wrap" AllowDrop="True"
+                   Drop="txbDest_Drop"/>
+        </ScrollViewer>
+
+        <Button Name="BtnDest" Margin="10" Grid.Row="2" Grid.Column="1" 
+                Background="Lavender" AllowDrop="True"
+                Drop="btnDest_Drop" Click="btnDest_Click">
+            <StackPanel Margin="10">
+                <TextBlock Text="Перетащи на меня" Margin="10 5" TextAlignment="Center"/>
+                <TextBlock Text="И еще я фокус передаю" Margin="10 5" TextAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        
+        <!-- элемент для демонстрации событий фокуса -->
+        <TextBox Name="EdFocus" Margin="10" Grid.Row="2" Grid.Column="0" Text="Я получаю и теряю фокус"
+                Background="YellowGreen" 
+                GotFocus="edFocus_GotFocus"
+                GotKeyboardFocus="edFocus_GotKeyboardFocus"
+                LostFocus="edFocus_LostFocus"/>
+
+
+    </Grid>
+    
+</Window>

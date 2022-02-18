@@ -1,0 +1,178 @@
+﻿<Window x:Class="ElementsControlContinue.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElementsControlContinue"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        
+        mc:Ignorable="d"
+        Title="Список автобусов автопредприятия" 
+        Height="500" Width="840" 
+        ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterScreen"
+        Icon="Images/main.ico" Closed="Window_Closed"
+        FontFamily="Verdana" FontSize="14">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Menu -->
+            <RowDefinition Height="25"/>
+            <!-- Рабочая область -->
+            <RowDefinition Height="*"/>
+            <!-- StatusBar -->
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <!-- ToolBar -->
+            <ColumnDefinition Width="43"/>
+            <!-- Рабочая область -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+              Height="25" Background="#FFEEF5FD" >
+            <MenuItem Header="Файл">
+                <MenuItem.Icon>
+                    <Image Source="Images/Menu/file.ico"></Image>
+                </MenuItem.Icon>
+                <MenuItem Header="Открыть" Click="Open_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Menu/operation.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Выход" Click="Exit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Menu/exit.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Операции">
+                <MenuItem.Icon>
+                    <Image Source="Images/Menu/operation.ico"></Image>
+                </MenuItem.Icon>
+                <MenuItem Header="Добавить...">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Menu/add.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Удалить" Click="Remove_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Menu/delete.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Изменить данные об автобусе...">
+                    <MenuItem.Icon>
+                        <Image Source="Images/Menu/edit.ico"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem.Icon>
+                    <Image Source="Images/Menu/help.ico"></Image>
+                </MenuItem.Icon>
+                <MenuItem Header="О программе..." Click="aboutWinShow_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <!-- контейнер для панелей инструментов -->
+        <ToolBarTray Grid.Row="1" Grid.Column="0" Orientation="Vertical"  Width="43">
+            <!-- панель инструментов -->
+            <ToolBar>
+                <Button ToolTip="Добавить автобус">
+                    <Image Source="Images/ToolBar/add.ico" Width="32"/>
+                </Button>
+                <Button Margin="0 10 0 0" ToolTip="Удалить автобус" Click="Remove_Click">
+                    <Image Source="Images/ToolBar/delete.ico" Width="32"/>
+                </Button>
+                <Button Margin="0 10 0 0" ToolTip="Изменить автобус">
+                    <Image Source="Images/ToolBar/edit.ico" Width="32"/>
+                </Button>
+                <Button Margin="0 10 0 0" ToolTip="Демонстрация элементов интерфейса" Click="Elements_Click">
+                    <Image Source="Images/ToolBar/demo.ico" Width="32"/>
+                </Button>
+                <Button Margin="0 160 0 0" ToolTip="Завершение работы" Click="Exit_Click">
+                    <Image Source="Images/ToolBar/exit.ico" Width="32"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        
+   
+        <!-- Параметры вывода таблицы DataGrid
+         RowBackground="LightGray"         - цвет фона четных строк  
+         AlternatingRowBackground="White"  - цвет фона нечетных строк
+         надо установить оба параметра для работы
+        
+         ItemsSource="{DynamicResource ResourceKey=DataBuses}" - привязка к источнику данных
+        
+         GridLinesVisibility="Vertical" - видимость линий
+         SelectionUnit="Cell"           - что можно выбирать - ячейку или строку
+        
+        -->
+        <DataGrid Name="dataGridMain" Grid.Row="1" Grid.Column="1" Margin="10"
+                  RowBackground="LightGray"  AlternatingRowBackground="White" 
+                  CanUserReorderColumns="False" CanUserResizeColumns="False" 
+                  AutoGenerateColumns="False"
+                  ColumnHeaderHeight="30" RowHeight="24"
+                  ItemsSource="{DynamicResource ResourceKey=DataBuses}"
+                  GridLinesVisibility="None"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия И.О." Binding="{Binding Path=Surname}"      Width="210"/>
+                <DataGridTextColumn Header="Номер"        Binding="{Binding Path=Numbers}"      Width="120"/>
+                <DataGridTextColumn Header="Марка"        Binding="{Binding Path=Manufacturer}" Width="160"/>
+                <DataGridTextColumn Header="Год выпуска"  Binding="{Binding Path=YearOfIssue}"  Width="120"/>
+                <DataGridTextColumn Header="Пробег"       Binding="{Binding Path=Mileage}"      Width="115"/>
+            </DataGrid.Columns>
+
+            <DataGrid.Resources>
+                <col:ArrayList x:Key="DataBuses">
+                    <local:DataBus Surname = "Мичурин В.А."    Numbers = "А261ХА" Manufacturer = "Mersedes Travengo" YearOfIssue = "2012"  Mileage = "382532.54"/>
+                    <local:DataBus Surname = "Тимирязев П.Е."  Numbers = "А988ХА" Manufacturer = "ISUZU" YearOfIssue = "2010" Mileage = "441442.01"/>
+                    <local:DataBus Surname = "Исаев С.И."      Numbers = "А255РО" Manufacturer = "Marco Polo" YearOfIssue = "2014" Mileage = "325000.01"/>
+                    <local:DataBus Surname = "Ульянищев М.М."  Numbers = "Н125ВА" Manufacturer = "Toyota Coaster" YearOfIssue = "2016" Mileage = "235001.01"/>
+                    <local:DataBus Surname = "Веньяминов А.М." Numbers = "Н787ОН" Manufacturer = "Mercedes Conecto" YearOfIssue = "2009" Mileage = "450200.08"/>
+                </col:ArrayList>
+            </DataGrid.Resources>
+            
+            <!-- контекстное меню DataGrid - должно создаваться для каждого элемента управления -->
+            <DataGrid.ContextMenu>
+                <ContextMenu Name="dataGridContextMenu">
+                    <MenuItem Header="Добавить..."/>
+                    <MenuItem Header="Удалить" Click="Remove_Click"/>
+                    <MenuItem Header="Изменить..."/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+            <!-- 
+                Свойство RowDetailsTemplate - шаблон отображения дополнительной информации 
+                для текущей строки данных в таблице
+            -->
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Height="36">
+                        <TextBlock Margin="10" 
+						           Text="Год выпуска: "  
+								   Foreground="DarkBlue" FontSize="14"/>
+                        <TextBlock Margin="0 10 10 10" 
+						           Text="{Binding Path=YearOfIssue}" 
+								   Foreground="DarkBlue" 
+								   FontSize="14" FontWeight="Bold"/>
+                        <TextBlock Margin="0 10 10 10" 
+						           Text="Производитель: "  
+								   Foreground="DarkBlue" FontSize="14"/>
+                        <TextBlock Margin="0 10 10 10" 
+						           Text="{Binding Path=Manufacturer}" 
+								   Foreground="DarkBlue" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+        <!-- строка состояния -->
+        <StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Background="#FFEEF5FD">
+            <TextBlock Margin="50 0 0 0" Name="StatusBar">Добро пожаловать</TextBlock>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -1,0 +1,133 @@
+﻿<Window x:Class="CommandDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommandDemo"
+        mc:Ignorable="d"
+        Title="Работа с командами WPF" Height="480" Width="840" 
+        FontFamily="Verdana" FontSize="14"
+        WindowStartupLocation="CenterScreen">
+    
+    <!-- команды, привязанные к окну, в т.ч. и команды, сгенерированные нами -->
+    <Window.CommandBindings>
+        <!-- стандартная команда Help, исполнитель команды: WindowBinding_Executer()  -->
+        <CommandBinding Command="Help" Executed="WindowBinding_Executer"/>
+
+        <!-- команды, разработанные для примера, исполнители команд задаются в Executed  -->
+        <CommandBinding Command="local:MainWindowCommands.Exit" Executed="Exit_Executer"/>
+        <CommandBinding Command="local:MainWindowCommands.Clear" Executed="Clear_Executed"/>
+        <CommandBinding Command="local:MainWindowCommands.Fill" Executed="Fill_Executer"/>
+        <CommandBinding Command="local:MainWindowCommands.OnePlusOne" Executed="OnePlusOne_Executer"/>
+    </Window.CommandBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- пример использования команд с назначенными исполнителями и со встроенной привязкой-->
+        <Menu Grid.ColumnSpan="2" MinHeight="35" FontFamily="Verdana" FontSize="14">
+            <MenuItem Header="Файл">
+                <!-- Пункт меню с назначенной командой, реализованной в приложении -->
+                <MenuItem Header="Заполнить - команда" Command="local:MainWindowCommands.Fill"/>
+                <!-- Пункт меню с назначенной командой, реализованной в приложении -->
+                <MenuItem Header="Один плюс один - команда" Command="local:MainWindowCommands.OnePlusOne"/>
+                <Separator/>
+                <!-- Пункт меню с назначенной командой, реализованной в приложении -->
+                <MenuItem Header="Выход - команда" Command="local:MainWindowCommands.Exit"/>
+            </MenuItem>
+            <MenuItem Header="Правка">
+                <!-- привязка стандартной команды к элементу интерфейса -->
+                <MenuItem Header="Копировать - команда" Command="Copy" 
+                    CommandTarget="{Binding ElementName=EdText}"/>
+                <MenuItem Header="Вставить - команда" Command="Paste" 
+                    CommandTarget="{Binding ElementName=EdText}"/>
+                <Separator/>
+                <!-- Обычный способ использования пункта меню - событие Click -->
+                <MenuItem Header="Очистить - клик" Click="ClearItems" />
+                <!-- Пункт меню с назначенной командой, реализованной в приложении -->
+                <MenuItem Header="Очистить - команда и клик" 
+                          Command="local:MainWindowCommands.Clear" 
+                          Click="Test" />
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="Помощь - команда" Command="Help"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- кнопка с привязанной к ней стандартной командой -->
+        <!-- можно использовать разные обработчики одной команды
+             на эту кнопку назначена команда Help, такая же команда
+             назначена и на другую кнопку, но на другой кнопке - команда
+             привязанная к окну
+        -->
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button Name="BtnCommand" Command="Help" Content="Команда Help" 
+                 Margin="10" Height="35">
+                <Button.CommandBindings>
+                    <CommandBinding Command="Help" Executed="CommandBinding_Executer"/>
+                </Button.CommandBindings>
+            </Button>
+
+            <Button Name="BtnOnePlusOne" Command="local:MainWindowCommands.OnePlusOne"
+                    Content="Один плюс один - команда"
+                    Margin="10"
+                    Height="35">
+                <Button.CommandBindings>
+                    <CommandBinding Command="local:MainWindowCommands.OnePlusOne" Executed="OnePlusOne_Executer"/>
+                </Button.CommandBindings>
+            </Button>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
+        <TextBlock Name="TxbInfo" Margin="10" 
+            Background="LightGreen"
+            TextWrapping="Wrap" />
+        </ScrollViewer>
+
+        <!-- две кнопки - в контейнере -->
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <!-- кнопка с маршрутизацией команды, команда привязана к корню дерева элементов 
+                 т.е. к Window
+            -->
+            <Button Name="BtnRoute" Command="Help" Content="Команда Help - маршрутизация"  
+                    Margin="10" Height="35"/>
+            <!-- Кнопка с привязкой к разработанной нами команде -->
+            <Button Name="BtnClear" Command="local:MainWindowCommands.Clear" 
+                    Content="Команда Clear - маршрутизация"
+                    Margin="10" Height="35"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
+        <TextBlock Name="TxbRoute"  Margin="10" Background="LightGreen"
+                   TextWrapping="Wrap" />
+        </ScrollViewer>
+
+        <!-- TextBox для работы команд из меню -->
+        <TextBox Name="EdText" Grid.Row="3" Grid.Column="0" Margin="10" 
+                 TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+
+        <!-- кнопки для работы со сделанными нами командами занимают одну и ту же
+             ячейку, визуально разведены за счет режимов выравнивания по вертикали -->
+        <!-- &name; - сущность, представление специальных символов, имеющих смысл
+             в разметке - уголковые скобки, а также произвольные символы
+             можно также указывать сущность hex-кодом &#код;
+        -->
+        <Button Name="BtnFill" Command="local:MainWindowCommands.Fill"
+                Content="&lt; &#9756; Заполнить - команда &#9755; &#9742; &gt;" Grid.Row="3" Grid.Column="1"
+                Margin ="10" Padding="10 0 0 0"  Height="35" HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"/>
+        <Button Name="BtnExit" Command="local:MainWindowCommands.Exit" 
+                Content="Выход - команда" Grid.Row="3" Grid.Column="1" 
+                Margin="10" Height="35"
+                VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

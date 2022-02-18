@@ -1,0 +1,95 @@
+﻿<Window x:Class="ElementsControlContinue.ElementsWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ElementsControlContinue"
+        mc:Ignorable="d"
+        Title="Демонстрация элементов управления" Height="600" Width="800" 
+		WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+		ShowInTaskbar="False" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="35*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+
+        <ProgressBar Name="pbFirst" Grid.Row="0" Grid.Column="0" 
+                     Height="25" Foreground="Blue" Margin="10"
+                     Value="50"   />
+
+        <!--  
+           IsSelectionRangeEnabled="True" - выделять диапазон значений слайдера 
+           SelectionStart="0" SelectionEnd="50" - область выделения 
+        -->
+        <Slider Name="slFirst" Grid.Row="1" Grid.Column="0"  Margin="10" Height="35" 
+                TickPlacement="Both" TickFrequency="10"
+                IsSelectionRangeEnabled="True" SelectionStart="0" SelectionEnd="50"
+                Value="50" Minimum="0" Maximum="100" ValueChanged="slFirst_ValueChanged"/>
+
+        <!-- работа с изображением - возможны преобразования и трансформации изображния-->
+        <Image Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Margin="5">
+            <Image.Source>
+                <FormatConvertedBitmap Source="Images\cat.jpg" DestinationFormat="Gray32Float"/>
+            </Image.Source>
+        </Image>
+
+        <!-- простое средство для рисования мышью, стилусом, жестами -->
+        <InkCanvas Grid.Row="3" Grid.Column="1" Margin="5">
+            <Image Source="Images\bg.jpg"/>
+        </InkCanvas>
+        
+        <!-- элемент календарь -->
+        <!-- 
+            xmlns:sys="clr-namespace:System;assembly=mscorlib" - для использования типа
+            DateTime в элементе управления Calendar
+        -->
+        <Calendar 
+                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                  x:Name="clnFirst" HorizontalAlignment="Center" Margin="10" Grid.Row="2"
+                  DisplayDateEnd="2019-12-31" 
+                  DisplayDateStart="2019-06-01" 
+                  DisplayMode="Month"
+                  IsTodayHighlighted="False" 
+                  SelectionMode="MultipleRange">
+
+            <!--Диапазон выбранных дат в формате гггг-мм-дд -->
+            <Calendar.SelectedDates>
+                <sys:DateTime>2019-12-02</sys:DateTime>
+                <sys:DateTime>2019-12-05</sys:DateTime>
+                <sys:DateTime>2019-12-06</sys:DateTime>
+                <sys:DateTime>2019-12-08</sys:DateTime>
+                <sys:DateTime>2019-12-11</sys:DateTime>
+                <sys:DateTime>2019-12-12</sys:DateTime>
+            </Calendar.SelectedDates>
+
+            <!-- Диапазон зачеркнутых дат -->
+            <Calendar.BlackoutDates>
+                <CalendarDateRange End="2019-12-26 23:59:00" Start="2019-12-21"/>
+            </Calendar.BlackoutDates>
+        </Calendar>
+
+        <StackPanel Orientation="Vertical" Grid.Row="3">
+            <!-- для элемента DatePicker предусмотрим обработчик события выбора даты пользователем 
+                 событие SelectedDateChanged
+                 IsDropDownOpen="True" - элемент калндарь держать открытым
+            -->
+            <DatePicker Name="dpFirst" Margin="10" 
+                SelectedDateFormat="Long"
+                SelectedDateChanged="dpFirst_SelectedDateChanged"/>
+            
+            <TextBlock x:Name="tbCalendar" Margin="10" TextWrapping="Wrap" 
+                Text="Дата из элемента Calendar" />
+            <TextBlock x:Name="tbDatePicker" Margin="10, 0,10,10" TextWrapping="Wrap" 
+                Text="Дата из элемента DatePicker"/>
+            <Button x:Name="btnGetDate" Content="Получить дату из элемента Calendar" 
+                Margin="10, 30, 10, 10" Height="35" Click="btnGetDate_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

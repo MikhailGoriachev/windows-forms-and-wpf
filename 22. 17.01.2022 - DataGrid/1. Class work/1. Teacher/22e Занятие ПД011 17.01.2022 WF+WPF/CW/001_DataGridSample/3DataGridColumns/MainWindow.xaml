@@ -1,0 +1,39 @@
+﻿<Window x:Class="_3DataGridColumns.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:_3DataGridColumns"
+        Title="Использование GridView" Height="350" Width="525">
+    
+    <!-- 
+         О ресурсах подробнее говорим на следующих занятиях 
+         Кратко: ресурс в д.с. - коллекция данных, доступная в разметке или тип данных
+    -->
+    <Window.Resources>
+        <!-- Тип Customer - ресурс, доступный в разметке по ключу "customers" -->
+        <local:Customer x:Key="customers"></local:Customer>
+    </Window.Resources>
+    
+    <Grid>
+        <!-- Основы привязки данных, Binding: 
+             ItemsSource="{Binding Source={StaticResource customers}, Path=CustomersList}"
+             Весь DataGrid привязан к коллекции CustomersList
+        
+        StaticResource - его части могут меняться, но весь в целом - нет 
+        -->
+        <DataGrid AutoGenerateColumns="False"
+                  ItemsSource="{Binding Source={StaticResource customers}, Path=CustomersList}">
+            
+            <!-- В прикрепленном свойстве привязываем столбцы к нужным полям типа/класса Customer -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя клиента" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Фамилия клиента" Binding="{Binding LastName}"/>
+                
+                <DataGridTextColumn Header="Почта" Binding="{Binding Email}"/>
+                <DataGridCheckBoxColumn Header="Льгота" Binding="{Binding IsMember}"/>
+                <!--<DataGridComboBoxColumn Header="Состояние заказа" TextBinding="{Binding Status}"/>-->
+                <DataGridTextColumn Header="Состояние заказа" Binding="{Binding Status}"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

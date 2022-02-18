@@ -1,0 +1,108 @@
+﻿<Window x:Class="WpfFigure.Views.ListFiguresWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfFigure.Views"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:models="clr-namespace:WpfFigure.Models"
+        mc:Ignorable="d"
+        Title="Список фигур" Height="600" SizeToContent="Width"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        FontFamily="Verdana" FontSize="16"
+        Background="DimGray"
+        Icon="../Images/logo.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Content="Список фигур"
+               Margin="10"
+               Height="40"
+               Background="Silver"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        <ListView Grid.Row="1"
+                  Margin="10"
+                  ItemsSource="{DynamicResource ResourceKey=figures}"
+                  Background="Silver"
+                  Foreground="Black"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"  >Название фигуры</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Density}">Плотность</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Area}"   >Площадь</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Volume}" >Объём</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Mass}"   >Масса</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+                <col:ArrayList x:Key="figures">
+                    
+                    <!-- Усечённые конусы -->
+                    <models:FigureViewModel Title="Усечённый конус" 
+                                        Density="7 700,00000"
+                                        Area="1 875,30118"
+                                        Volume="2 230,54797"
+                                        Mass="17 175 219,37997"/>
+                    <models:FigureViewModel Title="Усечённый конус" 
+                                        Density="8 933,00000"
+                                        Area="2 104,85224"
+                                        Volume="1 894,07300"
+                                        Mass="16 919 754,13924"/>
+                    
+                    <!-- Сферы -->
+                    <models:FigureViewModel Title="Сфера" 
+                                        Density="916,00000"
+                                        Area="314,15927"
+                                        Volume="392,69908"
+                                        Mass="359 712,35884"/>
+                    <models:FigureViewModel Title="Сфера" 
+                                        Density="2 700,00000"
+                                        Area="113,09734"
+                                        Volume="84,82300"
+                                        Mass="229 022,10445"/>
+                    
+                    <!-- Цилиндры -->
+                    <models:FigureViewModel Title="Цилиндр" 
+                                        Density="7 700,00000"
+                                        Area="195,33588"
+                                        Volume="203,77423"
+                                        Mass="1 569 061,57964"/>
+                    <models:FigureViewModel Title="Цилиндр" 
+                                        Density="8 933,00000"
+                                        Area="394,90480"
+                                        Volume="602,29527"
+                                        Mass="5 380 303,69038"/>
+                    
+                    <!-- Параллелепипеды -->
+                    <models:FigureViewModel Title="Прямоугольный параллелепипед" 
+                                        Density="7 700,00000"
+                                        Area="822,29304"
+                                        Volume="1 603,51565"
+                                        Mass="12 347 070,54146"/>
+                    <models:FigureViewModel Title="Прямоугольный параллелепипед" 
+                                        Density="916,00000"
+                                        Area="319,20440"
+                                        Volume="372,89998"
+                                        Mass="341 576,38218"/>
+                </col:ArrayList>
+            </ListView.Resources>
+        </ListView>
+
+        <Button Grid.Row="2"
+                Background="#FFD24949"
+                Height="50"
+                Width="320"
+                Margin="0 10"
+                Content="Выход"
+                Foreground="Black"
+                BorderThickness="3"
+                BorderBrush="RosyBrown"
+                Click="Exit_Click"/>
+    </Grid>
+</Window>

@@ -1,0 +1,65 @@
+﻿<Window x:Class="HomeWork.Views.SelectedTelevistionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        mc:Ignorable="d"
+        Title="Выбранные телевизоры" Height="450" 
+        SizeToContent="Width"
+        FontFamily="Verdana" FontSize="14"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Icon="..\Images\RepairShop\television.png"
+        Background="DimGray"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="800"/>
+        </Grid.ColumnDefinitions>
+
+            <!-- Заголовок -->
+        <Label Grid.Row="0"
+               Name="LblHeader"
+               Background="Silver"
+               Content="Выборка по"
+               FontSize="18"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+
+        <!-- Список телевизоров -->
+        <ListView Name="LviTelevisions"
+                  Grid.Row="1"
+                  Margin="10 10 10 10"
+                  Background="Silver">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Model}">Модель</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Diagonal}">Диагональ</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Defect}">Дефект</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Master}">Мастер</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Owner}">Владелец</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}">Стоимость ремонта</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <!-- Выход -->
+        <Button Grid.Row="2"
+                Content="Выход"
+                Height="40"
+                Width="300"
+                Foreground="Black"
+                Background="#FFE85353"
+                BorderBrush="Black"
+                BorderThickness="2"
+                IsCancel="True"/>
+
+    </Grid>
+</Window>

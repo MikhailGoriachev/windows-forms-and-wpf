@@ -1,0 +1,35 @@
+﻿<Window x:Class="HelloWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelloWpf"
+        mc:Ignorable="d"
+        Title="Заголовок окна" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" Loaded="MainWindow_OnLoaded">
+    <Grid>
+        <!-- Это комментарий -->
+        <TextBox x:Name="TxbGreeting" 
+            Margin="100,50,50,328" 
+            Text="Привет, мир!" 
+            FontFamily="Segoe UI Black" 
+            FontSize="18">
+        </TextBox>
+        <Rectangle 
+            Fill="BlueViolet" 
+            HorizontalAlignment="Left" 
+            Height="164" Margin="164,121,0,0" 
+            Stroke="DarkBlue" 
+            VerticalAlignment="Top" Width="531"/>
+        
+        <Button 
+            Content="Приветствовать" 
+            HorizontalAlignment="Left" 
+            Margin="194,312,0,0" 
+            VerticalAlignment="Top" 
+            Width="475" Height="68" 
+            FontFamily="Trebuchet MS" 
+            FontSize="36" 
+            Click="Hello_Click"/>
+    </Grid>
+</Window>

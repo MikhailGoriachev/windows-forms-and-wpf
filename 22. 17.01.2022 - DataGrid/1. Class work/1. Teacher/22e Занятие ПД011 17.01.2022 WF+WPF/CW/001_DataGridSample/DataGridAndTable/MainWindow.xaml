@@ -1,0 +1,14 @@
+﻿<Window x:Class="DataGridAndTable.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Использование DataGrid - работа с DataTable" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <TextBlock x:Name="TblInfo" Margin="10"><Run Text="Выбранные данные"/><Run Text="      "/><Run Text=" (двойной клик по строке для выбора): "/></TextBlock>
+        <DataGrid Name="Grid1" Margin="10,40,10,10"
+                  AutoGenerateColumns="True"
+                  MouseDoubleClick="grid1_MouseDoubleClick" >
+        </DataGrid>
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "001_ControlsElements", "ControlsElements\001_ControlsElements.csproj", "{980E6364-B2A1-4F39-A23D-D293C3062FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "002_MenuToolbarTabControls", "MenuToolbarTabControls\002_MenuToolbarTabControls.csproj", "{59B6FFCD-3AEE-4CB3-8605-809836963869}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{980E6364-B2A1-4F39-A23D-D293C3062FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{980E6364-B2A1-4F39-A23D-D293C3062FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{980E6364-B2A1-4F39-A23D-D293C3062FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{980E6364-B2A1-4F39-A23D-D293C3062FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B6FFCD-3AEE-4CB3-8605-809836963869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B6FFCD-3AEE-4CB3-8605-809836963869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B6FFCD-3AEE-4CB3-8605-809836963869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B6FFCD-3AEE-4CB3-8605-809836963869}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {970E21CE-5C88-40F1-8C2F-E98EF88D7013}
+	EndGlobalSection
+EndGlobal

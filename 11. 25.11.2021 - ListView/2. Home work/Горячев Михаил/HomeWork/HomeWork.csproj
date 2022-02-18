@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E6D8C7FD-501D-4FFC-8BD6-306A02F31D44}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HomeWork</RootNamespace>
+    <AssemblyName>HomeWork</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeAppliancesController.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ElectricalAppliance.cs" />
+    <Compile Include="Models\HomeAppliances.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Views\HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormInfo.Designer.cs">
+      <DependentUpon>FormInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ApplianceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ApplianceForm.Designer.cs">
+      <DependentUpon>ApplianceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionParamsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SelectionParamsForm.Designer.cs">
+      <DependentUpon>SelectionParamsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\FormInfo.resx">
+      <DependentUpon>FormInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ApplianceForm.resx">
+      <DependentUpon>ApplianceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SelectionParamsForm.resx">
+      <DependentUpon>SelectionParamsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgramInfo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Address-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder-Go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder-Star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home-Page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computer_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computer_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\after_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table_sort_filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word_count.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_power_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power_surge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\price_alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\category_group_select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Light Bulb On.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ball Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ball Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gear-In.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow-In.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computer_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper-pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil-Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Building-Edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Building-Add.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

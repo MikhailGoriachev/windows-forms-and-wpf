@@ -1,0 +1,68 @@
+﻿<Window x:Class="HomeWork.Views.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        mc:Ignorable="d"
+        Title="Домашнее задание на 12.01.2022" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        FontFamily="Verdana" FontSize="16"
+        Foreground="White" Background="DimGray"
+        Icon="../Images/freebsd.png">
+    <StackPanel Orientation="Vertical"
+                Width="400">
+
+        <!-- Заголовок -->
+        <Label Content="Главное меню"
+               Background="#4527a0"
+               Foreground="White"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Height="40"
+               Margin="0 0 0 20"/>
+
+        <!--#region Пункты меню -->
+
+        <!-- Списки пилотов и стюардесс -->
+        <Button Content="Списки пилотов и стюардесс"
+                Margin="30 10"
+                Height="50"
+                Background="#FFA2A2A2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Click="Lists_Click"/>
+
+        <!-- Ремонт телевизоров -->
+        <Button Content="Ремонт телевизоров"
+                Margin="30 10"
+                Height="50"
+                Background="#FFA2A2A2"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Click="ListRepairShop_Click"/>
+
+        <!-- О программе -->
+        <Button Content="О программе"
+                Margin="30 40 30 10"
+                Height="50"
+                Background="#FF5C9BDA"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Click="ProgramInfo_Click"/>
+
+        <!-- Выход -->
+        <Button Content="Выход"
+                Margin="30 10 30 40"
+                Height="50"
+                Foreground="Black"
+                Background="#FFE85353"
+                BorderBrush="Black"
+                BorderThickness="2"
+                Click="Exit_Click"/>
+
+        <!--#endregion-->
+
+    </StackPanel>
+</Window>

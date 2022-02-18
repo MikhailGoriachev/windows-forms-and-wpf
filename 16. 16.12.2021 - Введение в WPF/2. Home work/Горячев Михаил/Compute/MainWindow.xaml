@@ -1,0 +1,145 @@
+﻿<Window x:Class="Compute.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Compute"
+        mc:Ignorable="d"
+        Title="Домашнее задание на 20.12.2021" 
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- цвет фона -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.1" Color="Silver"/>
+                    <GradientStop Offset="0.6" Color="DimGray"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- создание строк -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="100*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TextBlock для ввода числа A -->
+        <TextBlock Text="Ввод числа A"
+                   Grid.Row="0"
+                   FontSize="15"
+                   TextAlignment="Center"
+                   Padding="15"
+                   Background="Silver"
+                   Margin="20,15,500,15"/>
+
+        <!-- TextBox для ввода числа A -->
+        <TextBox Name="TbxInputA"
+                 Grid.Row="0"
+                 FontSize="15"
+                 Padding="15"
+                 FontFamily="Verdana"
+                 Background="LightGray"
+                 Margin="310 15 200 15"
+                 KeyDown="KetDownTextBox_Command"
+                 TextChanged="TbxInputTextChanged_Command"
+                 TabIndex="0"/>
+
+        <!-- TextBlock для ввода числа B -->
+        <TextBlock Text="Ввод числа B"
+                   Grid.Row="1"
+                   FontSize="15"
+                   TextAlignment="Center"
+                   Padding="15"
+                   Background="Silver"
+                   Margin="20 15 500 15"/>
+
+        <!-- TextBox для ввода числа B -->
+        <TextBox Name="TbxInputB"
+                 Grid.Row="1"
+                 FontSize="15"
+                 Padding="15"
+                 FontFamily="Verdana"
+                 Background="LightGray"
+                 Margin="310 15 200 15"
+                 KeyDown="KetDownTextBox_Command"
+                 TextChanged="TbxInputTextChanged_Command"
+                 TabIndex="1"/>
+
+        <!-- TextBlock для ввода числа C -->
+        <TextBlock Text="Ввод числа C"
+                   Grid.Row="2"
+                   FontSize="15"
+                   TextAlignment="Center"
+                   Padding="15"
+                   Background="Silver"
+                   Margin="20 15 500 15"/>
+
+        <!-- TextBlock для ввода числа C -->
+        <TextBox Name="TbxInputC"
+                 Grid.Row="2"
+                 FontSize="15"
+                 Padding="13"
+                 FontFamily="Verdana"
+                 Background="LightGray"
+                 Margin="310 15 200 15"
+                 KeyDown="KetDownTextBox_Command"
+                 TextChanged="TbxInputTextChanged_Command"
+                 TabIndex="2"/>
+
+        <!-- TextBlock для вывода результата -->
+        <TextBlock Name="TblResult"
+                   Grid.Row="3"
+                   FontSize="15"
+                   FontFamily="Verdana"
+                   VerticalAlignment="Stretch"
+                   Text="Результат"
+                   Margin="20 0" 
+                   Background="WhiteSmoke"
+                   Padding="12"/>
+
+        
+        <!-- Кнопка для вычисления среднего арифметического -->
+        <Button Name="BtnAvg"
+                Grid.Row="4"
+                Margin="20 30 550 30"
+                Background="GreenYellow"
+                FontFamily="Verdana"
+                FontSize="15"
+                Content="Среднее арифметическое"
+                Click="BtnAvg_Click"
+                TabIndex="3"/>
+
+
+        <!-- Кнопка для вычисления среднего геометрического трех чисел -->
+        <Button Name="BtnMean"
+                Grid.Row="4"
+                Margin="260 30 280 30"
+                Background="GreenYellow"
+                FontFamily="Verdana"
+                FontSize="15"
+                Content="Среднее геометрическое"
+                Click="BtnMean_Click"
+                TabIndex="4"/>
+
+        <!-- Кнопка для вычисления вычисление корня квадратного уравнения с коэффициентами -->
+        <Button Name="BtnEquation"
+                Grid.Row="4"
+                Margin="530 30 20 30"
+                Background="GreenYellow"
+                FontFamily="Verdana"
+                FontSize="15"
+                Content="Квадратное уравнение"
+                Click="BtnEquation_Click"
+                TabIndex="5"/>
+    </Grid>
+</Window>

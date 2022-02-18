@@ -1,0 +1,62 @@
+﻿<Window x:Class="RadioButtons.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RadioButtons"
+        mc:Ignorable="d"
+        Background="AliceBlue"
+        Title="MainWindow" 
+        Height="290" 
+        Width="600"
+        FontSize="14">
+    <StackPanel Orientation="Horizontal">
+        <!--
+                GroupBox - используется для группирования элементов управления.
+                Контролы RadioButton групируются, когда находятся в одном контейнере компоновки.
+            -->
+        <GroupBox Header="GroupBox" Margin="10" VerticalAlignment="Top"
+                  Width="230">
+            <StackPanel>
+                <!-- 
+                Пример радиокнопок с обработчиками событий, первые две радиокнопки принадлежат
+                одной группе (с именем "а"), последние три радиокнопки принадлежат другой группе
+                -->
+                <RadioButton Name="Rb1" Content="Radio button 1: зеленый фон" 
+                             Margin="3 12 3 3" GroupName="a"
+                             Checked="Rb1_Checked"/>
+                <RadioButton Name="Rb2" Content="Radio button 2: исходный фон" 
+                             Margin="3" GroupName="a"
+                             Checked="Rb2_Checked"/>
+                <RadioButton Name="Rb3" Content="Radio button 3: фото Cat1" Margin="3" 
+                             Checked="Rb3_Checked"/>
+                <RadioButton Name="Rb4" Content="Radio button 4: фото Cat2" Margin="3" 
+                             Checked="Rb4_Checked" />
+                <RadioButton Name="Rb5" Content="Radio button 5: фото Cat3" Margin="3 3 3 12" 
+                             Checked="Rb5_Checked" />
+
+                <Button HorizontalAlignment="Center" Margin="3" Padding="3" 
+                        Click="Pending_Click" Height="50" Width="180">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="0 5 0 0">Опросить</TextBlock>
+                        <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="0 0 0 5">радиокнопки</TextBlock>
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </GroupBox>
+
+        <!-- В этом групп-боксе разместим Image, загружаемый по клику на радиокнопки Rb3, Rb4, Rb5 
+        Групп-бокс не обязателен, фактически он играет роль рамки-->
+        <GroupBox Margin="5" Header="Котики" Width="320">
+            <!-- 
+            начальная картинка - Cat0.jpg
+            Stretch="UniformToFill" - картинка масштабируется так, чтобы
+            полностью поместиться в отведенном поле
+            -->
+            <Image Name="ImgCat" Margin="5" 
+                   Source="Images/Cat0.jpg" 
+                   Stretch="UniformToFill"/>
+        </GroupBox>
+    </StackPanel>
+</Window>

@@ -1,0 +1,1101 @@
+﻿<Window x:Class="HomeWork.Views.DataGridRepairShopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        xmlns:models="clr-namespace:HomeWork.Models.Task1"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d"
+        Title="Ремонт телевизоров"
+        Icon="..\Images\RepairShop\television.png"
+        Background="DimGray"
+        FontFamily="Verdana" FontSize="14"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <models:TelevisionModel x:Key="televisions"/>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="560"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Контекстное меню окна -->
+        <Grid.ContextMenu>
+            <ContextMenu>
+
+                <!-- Новая мастерская -->
+                <MenuItem Click="CreateRepairShop_Click">
+
+                    <MenuItem.Icon>
+                        <Image Source="../Images/RepairShop/cog_add.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Новая мастерская..."
+                                       FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Изменить мастерскую -->
+                <MenuItem Click="EditRepairShop_Click">
+
+                    <MenuItem.Icon>
+                        <Image Source="../Images/RepairShop/cog_edit.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Изменить мастерскую..."
+                                       FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <Separator/>
+
+                <!-- Выход -->
+                <MenuItem Click="Exit_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Выход"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+            </ContextMenu>
+        </Grid.ContextMenu>
+
+        
+        <!-- #region Меню -->
+        <Menu Background="#FF1EA2BB">
+
+            <!-- Иконка окна -->
+            <Image Source="../Images/RepairShop/cog.png"
+                   Height="20"
+                   IsEnabled="False">
+                <Image.ToolTip>
+                    <ToolTip Content="Ремонт телевизоров"/>
+                </Image.ToolTip>
+            </Image>
+
+            <!-- #region Файл -->
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Файл"
+                               Foreground="White"
+                               FontSize="14"/>
+                    </StackPanel>
+                </MenuItem.Header>
+
+                <!-- Выход -->
+                <MenuItem Click="Exit_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Выход"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+            <!-- #endregion -->
+
+
+            <!-- #region Мастерская -->
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Мастерская"
+                               Foreground="White"
+                               FontSize="14"/>
+                    </StackPanel>
+                </MenuItem.Header>
+
+
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Управление мастерской"/>
+                </MenuItem.ToolTip>
+
+                <!-- Новая мастерская -->
+                <MenuItem Click="CreateRepairShop_Click">
+
+                    <MenuItem.Icon>
+                        <Image Source="../Images/RepairShop/cog_add.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Новая мастерская..."
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Изменить мастерскую -->
+                <MenuItem Click="EditRepairShop_Click">
+
+                    <MenuItem.Icon>
+                        <Image Source="../Images/RepairShop/cog_edit.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Изменить мастерскую..."
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+            <!-- #endregion -->
+
+
+            <!-- #region Телевизоры -->
+            <MenuItem Name="MniTelevisions">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Телевизоры"
+                               Foreground="White"
+                               FontSize="14"/>
+                    </StackPanel>
+                </MenuItem.Header>
+
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Управление коллекцией телевизоров"/>
+                </MenuItem.ToolTip>
+
+                <!-- Сформировать новую коллекцию -->
+                <MenuItem Click="Init_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\add_on.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Сформировать новую коллекцию"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Добавить коллекцию -->
+                <MenuItem Click="AddRange_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\add_package.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Добавить коллекцию"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Очистить список -->
+                <MenuItem Click="Clear_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\after_delete.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Очистить список"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <Separator/>
+
+                <!-- Добавить телевизор -->
+                <MenuItem Click="AddTelevision_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\television_add.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Добавить телевизор..."
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Изменить выбранный телевизор -->
+                <MenuItem Click="EditTelevision_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\television.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Изменить выбранный телевизор..."
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- Удалить выбранный телевизор -->
+                <MenuItem Click="RemoveTelevision_Click">
+                    <MenuItem.Icon>
+                        <Image Source="..\Images\RepairShop\television_delete.png"/>
+                    </MenuItem.Icon>
+
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Удалить выбранный телевизор"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+            </MenuItem>
+            <!-- #endregion -->
+
+
+            <!-- #region Сортировка -->
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Сортировка"
+                               Foreground="White"
+                               FontSize="14"/>
+                    </StackPanel>
+                </MenuItem.Header>
+
+                <!-- По производителю и типу -->
+                <MenuItem Tag="По производителю и типу"
+                          Click="MenuItemOrder_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По производителю и типу"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- По убыванию диагонали экрана -->
+                <MenuItem Tag="По убыванию диагонали экрана"
+                          Click="MenuItemOrder_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По убыванию диагонали экрана"
+                                    FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- По мастеру, выполняющему ремонт -->
+                <MenuItem Tag="По мастеру, выполняющему ремонт" 
+                          Click="MenuItemOrder_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По мастеру, выполняющему ремонт"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- По владельцу телевизора -->
+                <MenuItem Tag="По владельцу телевизора"
+                          Click="MenuItemOrder_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По владельцу телевизора"
+                                   FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+            </MenuItem>
+            <!-- #endregion -->
+
+
+            <!-- #region Выборка -->
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Выборка"
+                                Foreground="White"
+                                FontSize="14"/>
+                    </StackPanel>
+                </MenuItem.Header>
+
+                <!-- Минимальная стоимость ремонта -->
+                <MenuItem Tag="Минимальная стоимость ремонта"
+                            Click="MenuItemSelection_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Минимальная стоимость ремонта"
+                                    FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- По мастеру -->
+                <MenuItem Tag="По мастеру"
+                            Click="MenuItemSelection_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По убыванию диагонали экрана"
+                                    FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <!-- По диагонали экрана -->
+                <MenuItem Tag="По диагонали экрана" 
+                            Click="MenuItemSelection_Click">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="По мастеру, выполняющему ремонт"
+                                    FontSize="14"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+            </MenuItem>
+            <!-- #endregion -->
+
+        </Menu>
+        <!-- #endregion Меню-->
+            
+                    
+        <!-- #region Панель управление -->
+        <ToolBarTray Grid.Row="1" Background="#FFABABAB">
+            <ToolBar Background="#FFABABAB"
+                     Height="50">
+
+                <!-- Добавление телевизора -->
+                <Button Name="BtnAddTelevision"
+                        Margin="10 0 0 0"
+                        Foreground="White"
+                        Click="AddTelevision_Click">
+                    <Image Source="..\Images\RepairShop\television_add.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Добавить телевизор..."/>
+                    </Button.ToolTip>
+                </Button>
+
+
+                <!-- Редактирование телевизора -->
+                <Button Name="BtnEditTelevision"
+                        Foreground="White"
+                        Click="EditTelevision_Click">
+                    <Image Source="..\Images\RepairShop\television.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Редактировать выбранный телевизор"/>
+                    </Button.ToolTip>
+                </Button>
+
+
+                <!-- Удаление телевизора -->
+                <Button Name="BtnRemoveTelevision"
+                        Foreground="White"
+                        Click="RemoveTelevision_Click">
+                    <Image Source="..\Images\RepairShop\television_delete.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Удалить выбранный телевизор"/>
+                    </Button.ToolTip>
+                </Button>
+
+
+                <Separator Name="SepToolBar1" Margin="10 5"/>
+
+                
+                <!-- Сформировать новую коллекцию -->
+                <Button Name="BtnInit"
+                        Foreground="White"
+                        Click="Init_Click">
+                    <Image Source="..\Images\RepairShop\add_on.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Сформировать новую коллекцию"/>
+                    </Button.ToolTip>
+                </Button>
+
+                
+                <!-- Добавить коллекцию -->
+                <Button Name="BtnAddRange"
+                        Foreground="White"
+                        Click="AddRange_Click">
+                    <Image Source="..\Images\RepairShop\add_package.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Добавить новые элементы в коллекцию"/>
+                    </Button.ToolTip>
+                </Button>
+
+
+                <!-- Очистить список -->
+                <Button Name="BtnClear"
+                        Foreground="White"
+                        Click="Clear_Click">
+                    <Image Source="..\Images\RepairShop\after_delete.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Очистить список телевизоров"/>
+                    </Button.ToolTip>
+                </Button>
+
+                <Separator Name="SepToolBar2" Margin="20 5"/>
+
+                <!-- Выбор вида сортировик телевизоров -->
+                <ComboBox Name="CmbOrderBy"
+                          Width="300"
+                          Height="35"
+                          VerticalContentAlignment="Center"
+                          Background="Gray"
+                          Foreground="White"
+                          SelectedIndex="0"
+                          Padding="5"
+                          SelectionChanged="CmbOrderBy_SelectionChanged">
+                    <system:String>По производителю и типу</system:String>
+                    <system:String>По убыванию диагонали экрана</system:String>
+                    <system:String>По мастеру, выполняющему ремонт</system:String>
+                    <system:String>По владельцу телевизора</system:String>
+
+                    <ComboBox.ToolTip>
+                        <ToolTip Content="Выбор вида сортировки"/>
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+
+                <!-- Сортировка телевизоров -->
+                <Button Foreground="White"
+                        Margin="5 3 0 3"
+                        Click="Order_Click">
+                    <Image Source="..\Images\RepairShop\sort_asc_az.png" 
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Сортировать телевизоры"/>
+                    </Button.ToolTip>
+                </Button>
+
+                <!-- Выбор вида выборки -->
+                <ComboBox Name="CmbSelectionBy"
+                          Width="300"
+                          Padding="5"
+                          Height="35"
+                          Margin="80 0 0 0"
+                          VerticalContentAlignment="Center"
+                          Background="Gray"
+                          Foreground="White"
+                          SelectedIndex="0"
+                          SelectionChanged="CmbSelectionBy_SelectionChanged">
+                    <system:String>Минимальная стоимость ремонта</system:String>
+                    <system:String>По мастеру</system:String>
+                    <system:String>По диагонали экрана</system:String>
+
+                    <ComboBox.ToolTip>
+                        <ToolTip Content="Выбор вида выборки"/>
+                    </ComboBox.ToolTip>
+                </ComboBox>
+
+
+                <!-- Выборка телевизоров -->
+                <Button Foreground="White"
+                        Margin="5 3 20 3"
+                        Click="Selection_Click">
+                    <Image Source="..\Images\RepairShop\category_item_select.png"
+                           Stretch="None"/>
+                    <Button.ToolTip>
+                        <ToolTip Content="Выбрать телевизоры"/>
+                    </Button.ToolTip>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <!-- #endregion -->
+
+
+        <!-- #region Вкладки -->
+        <TabControl Name="TbcMain"
+                    Grid.Row="2"
+                    Background="DimGray"
+                    Margin="5 15 0 0"
+                    SelectionChanged="TbcMain_SelectionChanged">
+
+            <!-- #region Вкладка "Телевизоры в ремонте" -->
+            <TabItem Name="TbiMain"
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/RepairShop/television.png"/>
+                        <Label Name="LblHeaderMain" Content="Телевизоры в ремонте"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <StackPanel>
+
+                    <!-- Данные мастерской -->
+                    <Grid Grid.Row="2"
+                          Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Название мастерской -->
+                        <StackPanel Grid.Column="0"
+                                    VerticalAlignment="Center">
+                            <Label Grid.Column="0" 
+                                   Content="Название мастерской"
+                                   Background="Silver"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="30" Width="400"/>
+                            <TextBox Name="TbxTitle"
+                                     Text="Название"
+                                     Height="30" Width="400" BorderThickness="0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+
+                        <!-- Адресс мастерской -->
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
+                            <Label Grid.Column="0" 
+                                   Content="Адресс мастерской"
+                                   Background="Silver"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="30" Width="400"/>
+                            <TextBox Name="TbxAddress"
+                                     Text="Адрес"
+                                     Height="30" Width="400" BorderThickness="0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     IsReadOnly="True"/>
+
+                        </StackPanel>
+                    </Grid>
+
+                   
+                    
+                    <!-- Список телевизоров -->
+                    <DataGrid Grid.Row="1"
+                              Name="DgdTelevisions"
+                              ColumnWidth="*"
+                              MaxWidth="1080"
+                              Height="400"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Source={StaticResource televisions}, Path=CustomersList}"
+                              Background="LightGray"
+                              RowBackground="Silver"
+                              AlternatingRowBackground="LightGray"
+                              GridLinesVisibility="Vertical">
+
+                        <!-- #region Столбцы таблицы -->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Модель"             Binding="{Binding Model}"       Width="15*"/>
+
+                            <!-- Диагональ -->
+                            <DataGridTemplateColumn Header="Диагональ" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Diagonal}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Описание дефекта"   Binding="{Binding Defect}"      Width="35*"/>
+                            <DataGridTextColumn Header="Мастер"             Binding="{Binding Master}"      Width="20*"/>
+                            <DataGridTextColumn Header="Владелец"           Binding="{Binding Owner}"       Width="20*"/>
+
+                            <!-- Цена -->
+                            <DataGridTemplateColumn Header="Цена" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Price}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!-- #endregion -->
+
+                        <!-- Контекстное меню -->
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                
+                                <!-- Сформировать новую коллекцию -->
+                                <MenuItem Click="Init_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\add_on.png"/>
+                                    </MenuItem.Icon>
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Сформировать новую коллекцию"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <!-- Добавить коллекцию -->
+                                <MenuItem Click="AddRange_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\add_package.png"/>
+                                    </MenuItem.Icon>
+
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Добавить коллекцию"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <!-- Очистить список -->
+                                <MenuItem Click="Clear_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\after_delete.png"/>
+                                    </MenuItem.Icon>
+
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Очистить список"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <Separator/>
+
+                                <!-- Добавить телевизор -->
+                                <MenuItem Click="AddTelevision_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\television_add.png"/>
+                                    </MenuItem.Icon>
+
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Добавить телевизор..."
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <!-- Изменить выбранный телевизор -->
+                                <MenuItem Click="EditTelevision_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\television.png"/>
+                                    </MenuItem.Icon>
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Изменить выбранный телевизор..."
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <!-- Удалить выбранный телевизор -->
+                                <MenuItem Click="RemoveTelevision_Click">
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\television_delete.png"/>
+                                    </MenuItem.Icon>
+
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Удалить выбранный телевизор"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                                <Separator/>
+
+                                <!-- #region Сортировка -->
+                                <MenuItem>
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Сортировка"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                    
+                                    <!-- Иконка -->
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\sort_asc_az.png"/>
+                                    </MenuItem.Icon>
+
+                                    <!-- По производителю и типу -->
+                                    <MenuItem Tag="По производителю и типу"
+                                              Click="MenuItemOrder_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По производителю и типу"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <!-- По убыванию диагонали экрана -->
+                                    <MenuItem Tag="По убыванию диагонали экрана"
+                                              Click="MenuItemOrder_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По убыванию диагонали экрана"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <!-- По мастеру, выполняющему ремонт -->
+                                    <MenuItem Tag="По мастеру, выполняющему ремонт" 
+                                              Click="MenuItemOrder_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По мастеру, выполняющему ремонт"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <!-- По владельцу телевизора -->
+                                    <MenuItem Tag="По владельцу телевизора"
+                                              Click="MenuItemOrder_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По владельцу телевизора"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                </MenuItem>
+                                <!-- #endregion -->
+
+
+                                <!-- #region Выборка -->
+                                <MenuItem>
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Выборка"
+                                                   FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                    
+                                    <!-- Иконка -->
+                                    <MenuItem.Icon>
+                                        <Image Source="..\Images\RepairShop\category_item_select.png"/>
+                                    </MenuItem.Icon>
+
+                                    <!-- Минимальная стоимость ремонта -->
+                                    <MenuItem Tag="Минимальная стоимость ремонта"
+                                              Click="MenuItemSelection_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="Минимальная стоимость ремонта"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <!-- По мастеру -->
+                                    <MenuItem Tag="По мастеру"
+                                              Click="MenuItemSelection_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По убыванию диагонали экрана"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                    <!-- По диагонали экрана -->
+                                    <MenuItem Tag="По диагонали экрана" 
+                                              Click="MenuItemSelection_Click">
+                                        <MenuItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="По мастеру, выполняющему ремонт"
+                                                       FontSize="14"/>
+                                            </StackPanel>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+
+                                </MenuItem>
+                                <!-- #endregion -->
+
+
+                                <Separator/>
+
+                                <!-- Выход -->
+                                <MenuItem Click="Exit_Click">
+                                    <MenuItem.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Выход"
+                                       FontSize="14"/>
+                                        </StackPanel>
+                                    </MenuItem.Header>
+                                </MenuItem>
+
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+
+                </StackPanel>
+            </TabItem>
+            <!-- #endregion Вкладка "Телевизоры в ремонте"-->
+
+
+            <!-- #region Вкладка "Сортировка" -->
+            <TabItem Name="TbiOrdered" 
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/RepairShop/television.png"/>
+                        <Label Name="LblHeaderOrdered" Content="Сортировка"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <StackPanel>
+
+                    <!-- Название сортировки -->
+                    <StackPanel Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Margin="15">
+                        <Label Grid.Column="0" 
+                                   Content="Сортировка"
+                                   Background="Silver"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="30" Width="400"/>
+                        <TextBox Name="TbxOrderBy"
+                                     Text="Название сортировки"
+                                     Height="30" Width="400" BorderThickness="0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     IsReadOnly="True"/>
+                    </StackPanel>
+
+
+                    <!-- Список телевизоров -->
+                    <DataGrid Grid.Row="1"
+                              Name="DgdOrderedTelevisions"
+                              AutoGenerateColumns="False"
+                              ColumnWidth="*"
+                              MaxWidth="1080"
+                              Height="400"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              ItemsSource="{Binding Source={StaticResource televisions}, Path=CustomersList}"
+                              Background="LightGray"
+                              RowBackground="Silver"
+                              AlternatingRowBackground="LightGray"
+                              GridLinesVisibility="Vertical">
+
+
+                        <!-- #region Столбцы таблицы -->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Модель"             Binding="{Binding Model}"       Width="15*"/>
+
+                            <!-- Диагональ -->
+                            <DataGridTemplateColumn Header="Диагональ" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Diagonal}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Описание дефекта"   Binding="{Binding Defect}"      Width="35*"/>
+                            <DataGridTextColumn Header="Мастер"             Binding="{Binding Master}"      Width="20*"/>
+                            <DataGridTextColumn Header="Владелец"           Binding="{Binding Owner}"       Width="20*"/>
+
+                            <!-- Цена -->
+                            <DataGridTemplateColumn Header="Цена" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Price}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!-- #endregion -->                    
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <!-- #endregion Вкладка "Сортировка" -->
+            
+            
+            <!-- #region Вкладка "Выборка" -->
+            <TabItem Name="TbiSelected" 
+                     Height="30">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/RepairShop/television.png"/>
+                        <Label Name="LblHeaderSelected" Content="Выборка"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <StackPanel>
+
+                    <!-- Данные мастерской -->
+                    <Grid Grid.Row="2"
+                          Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Название выборки -->
+                        <StackPanel Grid.Column="0"
+                                    VerticalAlignment="Center">
+                            <Label Grid.Column="0" 
+                                   Content="Выборка"
+                                   Background="Silver"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="30" Width="400"/>
+                            <TextBox Name="TbxSelectionWhere"
+                                     Text="Название выборки"
+                                     Height="30" Width="400" BorderThickness="0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+
+                        <!-- Адресс мастерской -->
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
+                            <Label Name="LblSelectionParam"
+                                   Grid.Column="0" 
+                                   Content="Название параметра"
+                                   Background="Silver"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="30" Width="400"/>
+                            <TextBox Name="TbxSelectionParam"
+                                     Text="Значение параметра"
+                                     Height="30" Width="400" BorderThickness="0"
+                                     HorizontalContentAlignment="Center"
+                                     VerticalContentAlignment="Center"
+                                     IsReadOnly="True"/>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Список телевизоров -->
+                    <DataGrid Grid.Row="1"
+                              Name="DgdSelectedTelevisions"
+                              AutoGenerateColumns="False"
+                              ColumnWidth="*"
+                              MaxWidth="1080"
+                              Height="400"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              ItemsSource="{Binding Source={StaticResource televisions}, Path=CustomersList}"
+                              Background="LightGray"
+                              RowBackground="Silver"
+                              AlternatingRowBackground="LightGray"
+                              GridLinesVisibility="Vertical">
+
+
+                        <!-- #region Столбцы таблицы -->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Модель"             Binding="{Binding Model}"       Width="15*"/>
+
+                            <!-- Диагональ -->
+                            <DataGridTemplateColumn Header="Диагональ" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Diagonal}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Описание дефекта"   Binding="{Binding Defect}"      Width="35*"/>
+                            <DataGridTextColumn Header="Мастер"             Binding="{Binding Master}"      Width="20*"/>
+                            <DataGridTextColumn Header="Владелец"           Binding="{Binding Owner}"       Width="20*"/>
+
+                            <!-- Цена -->
+                            <DataGridTemplateColumn Header="Цена" Width="10*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"
+                                                 BorderThickness="0"
+                                                 Background="#00000000"
+                                                 Text="{Binding Path=Price}"
+                                                 TextAlignment="Right"
+                                                 HorizontalContentAlignment="Center"
+                                                 VerticalContentAlignment="Center"
+                                                 Margin="10 0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!-- #endregion -->
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <!-- #endregion Вкладка "Выборка" -->
+            
+        </TabControl>
+
+        <!-- #endregion -->        
+        
+        <!-- #region Статус-бар -->
+        <StatusBar Grid.Row="4"
+                   Background="#FF1EA2BB">
+
+            <!-- Количество телевизоров -->
+            <StatusBarItem>
+                <Label Name="LblStatusCount"
+                       Content="Количество телевизоров: "
+                       Foreground="White"/>
+            </StatusBarItem>
+        </StatusBar>
+        <!-- #endregion -->
+    </Grid>
+</Window>

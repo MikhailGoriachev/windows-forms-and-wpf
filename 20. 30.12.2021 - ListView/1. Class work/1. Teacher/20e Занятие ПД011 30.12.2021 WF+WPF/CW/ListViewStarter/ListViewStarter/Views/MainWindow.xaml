@@ -1,0 +1,110 @@
+﻿<Window x:Class="ListViewStarter.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Задание на 30.12.2021 - списочные элементы" 
+        Height="458" Width="300"
+        FontFamily="Verdana"
+        FontSize="12"
+        WindowStartupLocation="CenterScreen" 
+        Icon="../Images/egyptian_pyramid.png"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя полоса в Window -->
+        <TextBox Grid.Row="0" 
+                 IsReadOnly="True" 
+                 Focusable="False" 
+                 MaxLines="1" 
+                 FontSize="10"
+                 FontWeight="Bold"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 Background="DarkBlue" 
+                 Foreground="White"
+                 Text="Кнопочное меню, окна, радиокнопки"/>
+
+        <!-- Приглашение к выбору типа фигуры -->
+        <TextBlock Grid.Row="1" 
+            Text="Выберите тип фигуры:" 
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Stretch"
+            Margin="20 0"/>
+        <!-- Элемент выбора типа фигуры, харкод для типов фигур  -->
+        <ComboBox Grid.Row="2" Name="CbxBodyType" 
+                  Margin="10"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Top" 
+                  Width="260"
+                  IsEditable="False" 
+                  VerticalContentAlignment="Center"
+                  SelectionChanged="BodyType_Selected">
+            <system:String>Усеченный конус</system:String>
+            <system:String>Сфера</system:String>
+            <system:String>Цилиндр</system:String>
+            <system:String>Прямоугольный параллелепипед</system:String>
+        </ComboBox>
+
+        <Button Grid.Row="4" 
+                Width="260" 
+                Height="40"  
+                FontSize="12"
+                Background="DarkBlue" 
+                Foreground="White" Content="Список фигур"
+                Click="BodyList_Click"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave"/>
+
+        <Button Grid.Row="5"  
+                VerticalAlignment="Bottom"
+                Margin="0 0 0 5"
+                Width="260" 
+                Height="40"  
+                FontSize="12"
+                Background="DarkBlue" 
+                Foreground="White" Content="О программе"
+                Click="About_Click"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave"/>
+
+        <Button Grid.Row="6"  
+                VerticalAlignment="Top"
+                Margin="0 5 0 0 "
+                Width="260" 
+                Height="40"  
+                FontSize="12"
+                Background="DarkMagenta" 
+                Foreground="White" Content="Выход"
+                Click="Exit_Click"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave"/>
+
+        <!-- Нижняя полоса в Window -->
+        <TextBox Grid.Row="7" 
+                 IsReadOnly="True" 
+                 Focusable="False" 
+                 MaxLines="1" 
+                 FontSize="10"
+                 FontWeight="Bold"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 
+                 Background="DarkBlue" 
+                 Foreground="White"
+                 Text="Группа ПД011, Донецк, 2021"/>
+        
+    </Grid>
+</Window>

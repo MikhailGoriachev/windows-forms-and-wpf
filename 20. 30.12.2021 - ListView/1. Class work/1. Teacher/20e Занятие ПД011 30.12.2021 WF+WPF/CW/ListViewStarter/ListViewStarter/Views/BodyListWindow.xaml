@@ -1,0 +1,104 @@
+﻿<Window x:Class="ListViewStarter.Views.BodyListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ListViewStarter.Views"
+        xmlns:model="clr-namespace:ListViewStarter.Models"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Список фигур" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Icon="../Images/egyptian_pyramid.png">
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 BorderThickness="0"
+                 Margin="5"
+                 IsReadOnly="True"
+                 FontSize="16"
+                 FontWeight="Bold">
+            Список объемных тел (по два экземпляра каждого типа), загрузка из ресурсов
+        </TextBox>
+
+        <ListView Grid.Row="1"
+                  ItemsSource="{DynamicResource ResourceKey=bodies}"
+                  Width="780"
+                  Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Type}"
+                        Width="Auto">Тип тела</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Params}"
+                        Width="Auto">Параметры тела</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Area}"
+                        Width="Auto">Площадь, м2</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Volume}"
+                        Width="Auto">Объем, м3</GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+            <ListView.Resources>
+                <col:ArrayList x:Key="bodies">
+                    <model:Conoid RadiusTop="1" RadiusBottom="2" Height="1" />
+                    <model:Conoid RadiusTop="1.1" RadiusBottom="2.2" Height="2.1"/>
+                    <model:Sphere Radius="1.1"/>
+                    <model:Sphere Radius="2.1"/>
+                    <model:Cylinder Radius="3.2" Height="2.1"/>
+                    <model:Cylinder Radius="1.2" Height="3.2"/>
+                    <model:Parallelepiped A="1" B="2" C="3"/>
+                    <model:Parallelepiped A="3" B="4" C="5"/>
+                </col:ArrayList>
+            </ListView.Resources>
+        </ListView>
+
+        <TextBox Grid.Row="2"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 BorderThickness="0"
+                 Margin="5"
+                 IsReadOnly="True"
+                 FontSize="16"
+                 FontWeight="Bold">
+            Список объемных тел (по два экземпляра каждого типа), загрузка из кода
+        </TextBox>
+
+        <ListView Grid.Row="3"
+                  Name="LsvBodies"
+                  Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Type}"
+                        Width="Auto">Тип тела</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Params}"
+                        Width="Auto">Параметры тела</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Area}"
+                        Width="Auto">Площадь, м2</GridViewColumn>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path=Volume}"
+                        Width="Auto">Объем, м3</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

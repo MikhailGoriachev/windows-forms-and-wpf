@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E307B237-D5D9-41CB-8D9C-ECBE64F5740C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HomeWorkWF</RootNamespace>
+    <AssemblyName>HomeWorkWF</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Views\FormConoid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormConoid.Designer.cs">
+      <DependentUpon>FormConoid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormCylinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormCylinder.Designer.cs">
+      <DependentUpon>FormCylinder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormInfo.Designer.cs">
+      <DependentUpon>FormInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormParallelepiped.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormParallelepiped.Designer.cs">
+      <DependentUpon>FormParallelepiped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IFigure.cs" />
+    <Compile Include="Models\Conoid.cs" />
+    <Compile Include="Models\Cylinder.cs" />
+    <Compile Include="Models\RectangularParallelepiped.cs" />
+    <Compile Include="Models\Sphere.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\FormSphere.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormSphere.Designer.cs">
+      <DependentUpon>FormSphere.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\FormConoid.resx">
+      <DependentUpon>FormConoid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormCylinder.resx">
+      <DependentUpon>FormCylinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormInfo.resx">
+      <DependentUpon>FormInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormParallelepiped.resx">
+      <DependentUpon>FormParallelepiped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\FormSphere.resx">
+      <DependentUpon>FormSphere.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s_usech_konusa1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\v_parallelepipeda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\v_shara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\v_silindra2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Copper.jpg" />
+    <Content Include="Images\Granit.jpg" />
+    <Content Include="Images\Ice.jpg" />
+    <Content Include="Images\Steel.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

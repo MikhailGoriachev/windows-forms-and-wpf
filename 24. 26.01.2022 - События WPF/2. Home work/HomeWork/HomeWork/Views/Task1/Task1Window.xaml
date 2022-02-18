@@ -1,0 +1,486 @@
+﻿<Window x:Class="HomeWork.Views.Task1.Task1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:models="clr-namespace:HomeWork.Models.Task1"
+        xmlns:local="clr-namespace:HomeWork"
+        mc:Ignorable="d"
+        Title="Задание 1. Список сотрудников" MinHeight="600" MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="DimGray"
+        FontSize="14" FontFamily="Verdana"
+        Loaded="Window_Loaded"
+        Icon="../../Images/Task1/users_men_women.png">
+
+    <Window.Resources>
+        <models:EmployeeModel x:Key="SelectEmployee"/>
+    </Window.Resources>
+    
+    <Grid>
+        <!-- Объявление строк -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="510*"/>
+            <RowDefinition Height="30"/> 
+        </Grid.RowDefinitions>
+        
+        
+        <!--#region Меню -->
+        <Menu Grid.Row="0"
+              Background="Aquamarine"
+              FontSize="14">
+            
+            <!--#region Файл -->
+            <MenuItem Header="Файл" Height="30">
+                
+                <!-- Сохранить как... -->
+                <MenuItem Header="Сохранить как..." Click="SaveAs_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/folder_edit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Загрузить... -->
+                <MenuItem Header="Загрузить..." Click="Load_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/folder_go.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Выход -->
+                <MenuItem Header="Выход" Click="Exit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/door_out.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <!--#endregion-->
+            
+            <!--#region Управление -->
+            <MenuItem Header="Управление" Height="30">
+
+                <!-- Формирование списка сотрудников -->
+                <MenuItem Header="Формирование списка сотрудников"   Click="Initialization_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/Task1/users_4.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Добавление коллекции сотрудников -->
+                <MenuItem Header="Добавление коллекции сотрудников"  Click="AddRange_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/Task1/users_men_women.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <!-- Очистка списка -->
+                <MenuItem Header="Очистка списка"                    Click="Clear_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/after_delete.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+
+                <!-- Добавить сотрудника -->
+                <MenuItem Header="Добавить сотрудника..."            Click="Add_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/Task1/user_add.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Изменить выбранного сотрудника -->
+                <MenuItem Header="Изменить выбранного сотрудника..." Click="Edit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/Task1/user_edit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <!-- Удалить выбранного сотрудника -->
+                <MenuItem Header="Удалить выбранного сотрудника"     Click="Remove_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../../Images/Task1/user_delete.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+            </MenuItem>
+            <!--#endregion-->
+            
+            <!--#region Сортировка -->
+            <MenuItem Header="Сортировка" Height="30">
+                <MenuItem Header="Сортировка по фамилии" Click="Order_Click"/>
+                <MenuItem Header="Сортировка по имени" Click="Order_Click"/>
+                <MenuItem Header="Сортировка по отчеству" Click="Order_Click"/>
+                <MenuItem Header="Сортировка по убыванию оклада" Click="Order_Click"/>
+            </MenuItem>
+            <!--#endregion-->
+            
+            <!--#region Помощь -->
+            <MenuItem Header="Помощь" Height="30">
+                <MenuItem Header="О программе..." Click="InfoProgram_Click">
+                    <MenuItem.Icon>
+                        <Image Source="../Images/information.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <!--#endregion-->
+        </Menu>
+        <!--#endregion-->
+        
+        
+        <!--#region Панель инструментов -->
+        <ToolBarTray Grid.Row="1"
+                     Background="MediumAquamarine">
+            <ToolBar Background="#00000000">
+
+                <!-- Добавить сотрудника -->
+                <Button ToolTip="Добавить сотрудника..." Click="Add_Click"
+                        Margin="5 0 0 0">
+                    <Image Source="../../Images/Task1/user_add.png"/>
+                </Button>
+
+                <!-- Изменить выбранного сотрудника -->
+                <Button ToolTip="Изменить выбранного сотрудника..." Click="Edit_Click">
+                    <Image Source="../../Images/Task1/user_edit.png"/>
+                </Button>
+
+                <!-- Удалить выбранного сотрудника -->
+                <Button ToolTip="Удалить выбранного сотрудника" Click="Remove_Click">
+                    <Image Source="../../Images/Task1/user_delete.png"/>
+                </Button>
+
+                <Separator Margin="10"/>
+
+                <!-- Формирование списка сотрудников -->
+                <Button ToolTip="Формирование списка сотрудников" Click="Initialization_Click">
+                    <Image Source="../../Images/Task1/users_4.png"/>
+                </Button>
+
+                <!-- Добавление коллекции сотрудников -->
+                <Button ToolTip="Добавление коллекции сотрудников" Click="AddRange_Click">
+                    <Image Source="../../Images/Task1/users_men_women.png"/>
+                </Button>
+
+                <Separator Margin="10"/>
+
+                <!-- Сортировка -->
+                <ComboBox Name="CmbBorder" SelectedIndex="0"
+                          Background="Silver"
+                          BorderBrush="Aquamarine"
+                          BorderThickness="2"
+                          Height="30"
+                          Padding="10 0 10 0"
+                          Width="280"
+                          Margin="0 0 20 0"
+                          ToolTip="Выбор сортировки">
+                    <sys:String>Сортировка по фамилии</sys:String>
+                    <sys:String>Сортировка по имени</sys:String>
+                    <sys:String>Сортировка по отчеству</sys:String>
+                    <sys:String>Сортировка по убыванию оклада</sys:String>
+                </ComboBox>
+
+            </ToolBar>
+        </ToolBarTray>
+        <!--#endregion-->
+        
+        
+        <!--#region Контент окна -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <!--#region Список сотрудников -->
+            <DataGrid Name="DgvEmployees"  Grid.Row="2"
+                      Margin="15"
+                      Background="DarkGray"
+                      RowBackground="DarkGray"
+                      AlternatingRowBackground="Silver"
+                      RowHeaderWidth="0"
+                      BorderThickness="2"
+                      BorderBrush="Aquamarine"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionChanged="DgvEmployees_SelectionChanged"
+                      SelectionMode="Single"
+                      AllowDrop="True"
+                      Drop="DgvEmployees_Drop">
+
+                <!--#region Контекстное меню -->
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <!-- Формирование списка сотрудников -->
+                        <MenuItem Header="Формирование списка сотрудников"   Click="Initialization_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/Task1/users_4.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <!-- Добавление коллекции сотрудников -->
+                        <MenuItem Header="Добавление коллекции сотрудников"  Click="AddRange_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/Task1/users_men_women.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <Separator/>
+
+                        <!-- Очистка списка -->
+                        <MenuItem Header="Очистка списка"                    Click="Clear_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/after_delete.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <Separator/>
+
+                        <!-- Добавить сотрудника -->
+                        <MenuItem Header="Добавить сотрудника..."            Click="Add_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/Task1/user_add.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <!-- Изменить выбранного сотрудника -->
+                        <MenuItem Header="Изменить выбранного сотрудника..." Click="Edit_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/Task1/user_edit.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <!-- Удалить выбранного сотрудника -->
+                        <MenuItem Header="Удалить выбранного сотрудника"     Click="Remove_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/Task1/user_delete.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                        <!-- Сортировка -->
+                        <MenuItem Header="Сортировка">
+                            <MenuItem.Icon>
+                                <Image Source="../Images/sort_asc_az.png"/>
+                            </MenuItem.Icon>
+                            <MenuItem Header="Сортировка по фамилии" Click="Order_Click"/>
+                            <MenuItem Header="Сортировка по имени" Click="Order_Click"/>
+                            <MenuItem Header="Сортировка по отчеству" Click="Order_Click"/>
+                        </MenuItem>
+
+                        <Separator/>
+
+                        <!-- Выход -->
+                        <MenuItem Header="Выход" Click="Exit_Click">
+                            <MenuItem.Icon>
+                                <Image Source="../../Images/door_out.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <!--#endregion-->
+                
+                <!--#region Столбцы -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn CanUserSort="False"         Header="Фамилия"            Binding="{Binding Path=Surname}"    Width="20*"/>
+                    <DataGridTextColumn CanUserSort="False"         Header="Имя"                Binding="{Binding Path=Name}"       Width="20*"/>
+                    <DataGridTextColumn CanUserSort="False"         Header="Отчество"           Binding="{Binding Path=Patronymic}" Width="25*"/>
+                    <DataGridTextColumn CanUserSort="False"         Header="Город проживания"   Binding="{Binding Path=City}"       Width="25*"/>
+                    
+                    <!-- Возраст (лет) -->
+                    <DataGridTemplateColumn Header="Возраст (лет)"  Width="20*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Age}" 
+                                           Background="#00000000"
+                                           TextAlignment="Right"
+                                           Padding="0 0 5 0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Оклад (руб.) -->
+                    <DataGridTemplateColumn Header="Оклад (руб.)"  Width="20*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Salary, StringFormat={}{0:n2}}" 
+                                           Background="#00000000"
+                                           TextAlignment="Right"
+                                           Padding="0 0 5 0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                </DataGrid.Columns>
+                <!--#endregion-->
+            </DataGrid>
+            <!--#endregion-->
+
+        
+            <!--#region Информация о выбранном сотруднике (справа от списка) -->
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        DataContext="{StaticResource SelectEmployee}">
+                
+                <!-- Фамилия -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Фамилия"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoSurname"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Surname}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+                
+
+                <!-- Имя -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Имя"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoName"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Name}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+
+                
+                <!-- Отчество -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Отчество"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoPatronymic"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Patronymic}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+                
+
+                <!-- Город проживания -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Город проживания"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoCity"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding City}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+                
+
+                <!-- Возраст -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Возраст (лет)"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoAge"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Age}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+
+                
+                <!-- Оклад -->
+                <Label Background="DarkGray"
+                       Margin="10 15 10 0"
+                       Height="30"
+                       BorderThickness="2"
+                       BorderBrush="Aquamarine"
+                       Content="Оклад (руб.)"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Foreground="White"/>
+                <TextBox Name="TbxInfoSalary"
+                         Background="Gray"
+                         Margin="10 0"
+                         Height="30"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Salary}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         Foreground="White">
+                </TextBox>
+
+                
+            </StackPanel>
+            <!--#endregion-->
+            
+        </Grid>
+        <!--#endregion-->
+
+        
+        <!--#region Статус-бар-->
+        <StatusBar Grid.Row="3"
+                   Background="Aquamarine">
+            <TextBlock Name="TblAmountElem"
+                       FontSize="14"
+                       Text="Количество элементов: значение"
+                       Margin="15 0 0 0"/>
+        </StatusBar>
+        <!--#endregion-->
+        
+    </Grid>
+</Window>

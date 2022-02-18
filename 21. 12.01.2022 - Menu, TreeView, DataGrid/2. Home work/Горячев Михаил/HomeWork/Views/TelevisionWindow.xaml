@@ -1,0 +1,170 @@
+﻿<Window x:Class="HomeWork.Views.TelevisionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:HomeWork.Views"
+        mc:Ignorable="d"
+        Title="Добавление телевизора" Width="800"
+        FontFamily="Verdana"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="DimGray"
+        FontSize="14"
+        Icon="..\Images\RepairShop\television.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <Label Grid.Row="0" Grid.ColumnSpan="2"
+               Name="LblHeader"
+               Background="Silver"
+               Content="Добавление телевизора"
+               FontSize="20"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        
+        <!-- Первый столбец параметров -->
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="1" Grid.Column="0"
+                    Margin="20">
+
+            <!-- производитель и тип телевизора --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Производитель и тип телевизора"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+            <TextBox Name="TbxModel"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+
+            <!-- описание дефекта --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Описание дефекта"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Margin="0 40 0 0"/>
+            <TextBox Name="TbxDefect"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+
+            <!-- фамилия и инициалы владельца --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Фамилия и инициалы владельца"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Margin="0 40 0 0"/>
+            <TextBox Name="TbxOwner"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+        </StackPanel>
+        
+        
+        <!-- Второй столбец параметров -->
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="20">
+
+            <!-- стоимость ремонта --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Стоимость ремонта"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+            <TextBox Name="TbxPrice"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+
+            <!-- диагональ экрана --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Диагональ экрана"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Margin="0 40 0 0"/>
+            <ComboBox Name="CmbDiagonal" 
+                      Height="40"
+                      SelectedIndex="0"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center">
+                <system:String>22</system:String>
+                <system:String>26</system:String>
+                <system:String>32</system:String>
+                <system:String>37</system:String>
+                <system:String>40</system:String>
+                <system:String>42</system:String>
+                <system:String>46</system:String>
+                <system:String>50</system:String>
+                <system:String>60</system:String>
+                <system:String>65</system:String>
+            </ComboBox>
+
+            <!-- фамилия и инициалами мастера --> 
+            <Label Background="Silver"
+                   Height="40"
+                   Content="Фамилия и инициалы мастера"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Margin="0 40 0 0"/>
+            <TextBox Name="TbxMaster"
+                     Height="40"
+                     Background="White"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     TextChanged="Tbx_TextChanged"/>
+        </StackPanel>
+
+        
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            
+            <!-- Добавить -->
+            <Button Name="BtnOk"
+                    Content="Добавить"
+                    Height="50"
+                    Width="200"
+                    Margin="20 0"
+                    Background="YellowGreen"
+                    BorderBrush="Black" BorderThickness="2"
+                    Click="BtnOK_Click"/>
+            
+            <!-- Отменить -->
+            <Button Content="Отменить"
+                    Height="50"
+                    Width="200"
+                    Margin="20 0"
+                    Background="#FFE85353"
+                    BorderBrush="Black" BorderThickness="2"
+                    IsCancel="True"/>
+
+        </StackPanel>
+        
+        
+    </Grid>
+</Window>

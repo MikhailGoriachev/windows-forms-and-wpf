@@ -1,0 +1,40 @@
+﻿<Window x:Class="_6DataGridRowDeteils.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:_6DataGridRowDeteils"
+        Title="Использование GridView" Height="350" Width="525">
+
+    <Window.Resources>
+        <local:Customer x:Key="customers"></local:Customer>
+    </Window.Resources>
+
+    <Grid>
+        <!-- при размещении коллекции в коде, убрать ItemSource из разметки -->
+        <DataGrid AutoGenerateColumns="False" Name="DgCustomers"
+                  ItemsSource="{Binding Source={StaticResource customers}, Path=CustomersList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontWeight="Bold" Binding="{Binding FirstName}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn FontWeight="Bold" Binding="{Binding LastName}" Width="100"></DataGridTextColumn>
+            </DataGrid.Columns>
+            
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="2" TextBlock.Foreground="Green" TextBlock.FontWeight="Bold">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Email: " FontWeight="Normal"/>
+                            <TextBlock Text="{Binding Email}" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Is Member: " FontWeight="Normal"/>
+                            <TextBlock Text="{Binding IsMember}" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Состояние доставки: " FontWeight="Normal"/>
+                            <TextBlock Text="{Binding Status}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </Grid>
+</Window>
